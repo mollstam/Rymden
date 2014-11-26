@@ -3,8 +3,9 @@ using System.Collections;
 
 public class RoomController : MonoBehaviour
 {
-    public Transform[] Rooms;
+    public Transform StartingRoom;
     private Transform _currentRoom;
+    private Transform _currentComputer;
 
     public Transform CurrentRoom
     {
@@ -12,22 +13,45 @@ public class RoomController : MonoBehaviour
         set
         {
             _currentRoom = value;
-            var roomPos = _currentRoom.position;
-            transform.position = new Vector3(roomPos.x, roomPos.y, transform.position.z);
+            UpdateCameraPosition();
         }
     }
 
-    void Start ()
+    public Transform CurrentComputer
     {
-        CurrentRoom = Rooms[0];
+        get { return _currentComputer; }
+        set
+        {
+            _currentComputer = value;
+            UpdateCameraPosition();
+        }
     }
 
-    void Update ()
+    private void UpdateCameraPosition()
+    {
+        if (_currentComputer != null)
+        {
+            var computerPos = _currentComputer.position;
+            transform.position = new Vector3(computerPos.x, computerPos.y, transform.position.z);
+            return;
+        }
+
+        var roomPos = _currentRoom.position;
+        transform.position = new Vector3(roomPos.x, roomPos.y, transform.position.z);
+    }
+
+    public void Start()
+    {
+        CurrentRoom = StartingRoom;
+    }
+
+    public void Update()
     {
         if (Input.GetMouseButtonUp(0))
         {
             var doorways = GameObject.FindGameObjectsWithTag("DoorWay");
             var mousePosition = new Vector2(camera.ScreenToWorldPoint(Input.mousePosition).x, camera.ScreenToWorldPoint(Input.mousePosition).y);
+
             foreach (var doorway in doorways)
             {
                 if (doorway.collider2D.bounds.Contains(mousePosition))
@@ -36,6 +60,20 @@ public class RoomController : MonoBehaviour
                     break;
                 }
             }
+            
+            var computerways = GameObject.FindGameObjectsWithTag("ComputerWay");
+
+            foreach (var computerway in computerways)
+            {
+                if (computerway.collider2D.bounds.Contains(mousePosition))
+                {
+                    CurrentComputer = computerway.GetComponent<DoorWay>().Target.transform;
+                    break;
+                }
+            }
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+            CurrentComputer = null;
     }
 }
