@@ -3,3 +3,5 @@ Temp/
 Obj/
 UnityGenerated/
 *.sln
+*.csproj
+*.suo
