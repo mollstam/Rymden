@@ -1,11 +1,10 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class RoomController : MonoBehaviour
 {
     public Transform StartingRoom;
     private Transform _currentRoom;
-    private Transform _currentComputer;
+    private Transform _currentTerminal;
 
     public Transform CurrentRoom
     {
@@ -17,21 +16,21 @@ public class RoomController : MonoBehaviour
         }
     }
 
-    public Transform CurrentComputer
+    public Transform CurrentTerminal
     {
-        get { return _currentComputer; }
+        get { return _currentTerminal; }
         set
         {
-            _currentComputer = value;
+            _currentTerminal = value;
             UpdateCameraPosition();
         }
     }
 
     private void UpdateCameraPosition()
     {
-        if (_currentComputer != null)
+        if (_currentTerminal != null)
         {
-            var computerPos = _currentComputer.position;
+            var computerPos = _currentTerminal.position;
             transform.position = new Vector3(computerPos.x, computerPos.y, transform.position.z);
             return;
         }
@@ -48,32 +47,38 @@ public class RoomController : MonoBehaviour
     public void Update()
     {
         if (Input.GetMouseButtonUp(0))
+            HandleLeftMouseClick();
+
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetMouseButtonUp(1))
+            CurrentTerminal = null;
+    }
+
+    private void HandleLeftMouseClick()
+    {
+        if (CurrentTerminal != null)
+            return;
+
+        var doorways = GameObject.FindGameObjectsWithTag("DoorWay");
+        var mousePosition = new Vector2(camera.ScreenToWorldPoint(Input.mousePosition).x, camera.ScreenToWorldPoint(Input.mousePosition).y);
+
+        foreach (var doorway in doorways)
         {
-            var doorways = GameObject.FindGameObjectsWithTag("DoorWay");
-            var mousePosition = new Vector2(camera.ScreenToWorldPoint(Input.mousePosition).x, camera.ScreenToWorldPoint(Input.mousePosition).y);
-
-            foreach (var doorway in doorways)
+            if (doorway.collider2D.bounds.Contains(mousePosition))
             {
-                if (doorway.collider2D.bounds.Contains(mousePosition))
-                {
-                    CurrentRoom = doorway.GetComponent<DoorWay>().Target.transform;
-                    break;
-                }
-            }
-            
-            var computerways = GameObject.FindGameObjectsWithTag("ComputerWay");
-
-            foreach (var computerway in computerways)
-            {
-                if (computerway.collider2D.bounds.Contains(mousePosition))
-                {
-                    CurrentComputer = computerway.GetComponent<DoorWay>().Target.transform;
-                    break;
-                }
+                CurrentRoom = doorway.GetComponent<DoorWay>().Target.transform;
+                return;
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape))
-            CurrentComputer = null;
+        var terminals = GameObject.FindGameObjectsWithTag("Terminal");
+
+        foreach (var terminal in terminals)
+        {
+            if (terminal.collider2D.bounds.Contains(mousePosition))
+            {
+                CurrentTerminal = terminal.GetComponent<DoorWay>().Target.transform;
+                return;
+            }
+        }
     }
 }
