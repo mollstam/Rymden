@@ -6,6 +6,17 @@ public class RoomController : MonoBehaviour
     private Transform _currentRoom;
     private Transform _currentTerminal;
 
+    public Transform ActiveTransform
+    {
+        get
+        {
+            if (CurrentTerminal != null)
+                return CurrentTerminal;
+
+            return CurrentRoom;
+        }
+    }
+
     public Transform CurrentRoom
     {
         get { return _currentRoom; }
@@ -49,7 +60,7 @@ public class RoomController : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
             HandleLeftMouseClick();
 
-        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetMouseButtonUp(1))
+        if (CurrentTerminal != null && (Input.GetKeyDown(KeyCode.Escape) || Input.GetMouseButtonUp(1)))
             CurrentTerminal = null;
     }
 
