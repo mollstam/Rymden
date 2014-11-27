@@ -22,7 +22,9 @@ public class RoomController : MonoBehaviour
         get { return _currentRoom; }
         set
         {
+            InactivateAllRooms();
             _currentRoom = value;
+            _currentRoom.gameObject.SetActive(true);
             UpdateCameraPosition();
         }
     }
@@ -32,9 +34,24 @@ public class RoomController : MonoBehaviour
         get { return _currentTerminal; }
         set
         {
+            InactivateAllRooms();
             _currentTerminal = value;
+
+            if (value == null)
+                _currentRoom.gameObject.SetActive(true);
+            else
+                _currentTerminal.gameObject.SetActive(true);
+
             UpdateCameraPosition();
         }
+    }
+
+    private void InactivateAllRooms()
+    {
+        var rooms = GameObject.FindGameObjectsWithTag("Room");
+
+        foreach (var room in rooms)
+            room.gameObject.SetActive(false);
     }
 
     private void UpdateCameraPosition()

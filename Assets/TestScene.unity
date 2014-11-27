@@ -340,9 +340,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 605566658}
+  - 114: {fileID: 605566659}
   m_Layer: 0
   m_Name: TestTerminal
-  m_TagString: Untagged
+  m_TagString: Room
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -358,8 +359,21 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 823738587}
+  - {fileID: 1009367630}
   m_Father: {fileID: 0}
   m_RootOrder: 2
+--- !u!114 &605566659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 605566657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6611f6a42b9e46a49902aa3ab6db3dd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CharacterInterval: .00999999978
 --- !u!1 &672252829
 GameObject:
   m_ObjectHideFlags: 0
@@ -423,7 +437,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 5.19999981
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -471,7 +485,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ComputerTexture: {fileID: 8400000, guid: ebdda7312f95e3144bd049f6710613bb, type: 2}
+  _computerTexture2D: {fileID: 0}
   ComputerMaterial: {fileID: 2100000, guid: cb247e8ec6ac3a3458b1fc5ffd5b5369, type: 2}
+  _prevActive: {fileID: 0}
 --- !u!114 &672252837
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -611,6 +627,76 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 53c82ef23a12ed841b19a9576947b95c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!1 &1009367629
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1009367630}
+  - 23: {fileID: 1009367632}
+  - 102: {fileID: 1009367631}
+  m_Layer: 0
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1009367630
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1009367629}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -7.71000004, y: 4.17999983, z: 0}
+  m_LocalScale: {x: .100000001, y: .100000001, z: .100000001}
+  m_Children: []
+  m_Father: {fileID: 605566658}
+  m_RootOrder: 1
+--- !u!102 &1009367631
+TextMesh:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1009367629}
+  m_Text: test test
+  m_OffsetZ: -1
+  m_CharacterSize: 3
+  m_LineSpacing: 1
+  m_Anchor: 0
+  m_Alignment: 0
+  m_TabSize: 4
+  m_FontSize: 0
+  m_FontStyle: 0
+  m_RichText: 0
+  m_Font: {fileID: 12800000, guid: cc179d5633d190d4f82c744ee78fd7d7, type: 3}
+  m_Color:
+    serializedVersion: 2
+    rgba: 4294967295
+--- !u!23 &1009367632
+Renderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1009367629}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 2100000, guid: cc179d5633d190d4f82c744ee78fd7d7, type: 3}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
 --- !u!1001 &1554376975
 Prefab:
   m_ObjectHideFlags: 0
@@ -893,7 +979,7 @@ GameObject:
   - 4: {fileID: 1964796008}
   m_Layer: 0
   m_Name: TestRoom
-  m_TagString: Untagged
+  m_TagString: Room
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -923,7 +1009,7 @@ GameObject:
   - 4: {fileID: 2084265375}
   m_Layer: 0
   m_Name: TestRoom2
-  m_TagString: Untagged
+  m_TagString: Room
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
