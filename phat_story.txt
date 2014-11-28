@@ -1,0 +1,30 @@
+We're making an atmospheric little adventure taking place on a ship in space. Story corner stones in broad strokes:
+
+1. Player starts in living quarters of a spaceship, presumably waking up from sleep. Your mission on this ship is to deliver a shipment of food to the science colony at Europa (moon of Jupiter). Since the trip there is so long, multiple supply ships are always on their way at set intervals.
+2. A computer is blinking in the room. If you approach it it tells you this: The ship has tried to avoid an asteroid storm, diverting course. It was hit and damaged and is now tumbling in space. There is currently a fire between the greenhouse and engineering.
+
+You must get the ship back on course.
+
+
+Possible next actions:
+
+3. Player goes to the bridge and tries to fix the course, the ship blows up due to fire between the greenhouse and engineering spreading to to the engines.
+
+
+Possible next actions:
+
+3. Player goes to the green house and operates a terminal from there, venting the atmosphere. Since the player is in the room being vented, the player dies.
+
+
+
+Possible next actions:
+
+3. Player operates the computer outside of the green house, vents the atmosphere and then goes inside. All the plants are dead. The computer in the greenroom tells the player that the oxygen, without the plants in the greenroom, will not last until the moon Europa, but it will last until earth if you turn around soon.
+4. Player goes into engineering and checks up on the computer in there. There is a new message. The messages says the ship before you was destroyed by the asteroid storm and that you must reach the moon Europa or else the science colony will starve to death. The player also runs a full diagnostic on the engine in order to make the navigation computer stop complaining.
+5. Player goes towards navigation / command bridge where he / she must try to stop the ship from tumbling and to plot a new course. As the player walks from engineering to the command bridge a new message is available on the computers which thus flash as the player walks by. If he/she decides to read it, then it's a very panicky message from the colony about the situation and the grave need for the supplies you have.
+6. The player is given two choices by the navigation terminal on the command bridge. Either return to earth, surviving using the oxygen. Or, replot the course once again for the moon Europa. However, the oxygen won't last all the way, but the autopilot will be able to drop of the supplies so that the colony won't starve.
+
+
+---
+
+However the game ends, there is always a newspaper from earth shown at the end. The headlines of this newspaper shows the effect of your actions.
