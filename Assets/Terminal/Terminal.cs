@@ -90,6 +90,11 @@ public class Screen
             ? this
             : new Screen(newBehavior);
     }
+
+    public bool Equals(Screen screen)
+    {
+        return screen._behavior == _behavior;
+    }
 }
 
 public class Terminal : MonoBehaviour
@@ -145,17 +150,14 @@ public class Terminal : MonoBehaviour
 
                 if (int.TryParse(_input, out enteredNumber))
                 {
-                    var newScreen = _screens.Peek().OptionSelected(enteredNumber);
+                    var currentScreen = _screens.Peek();
+                    var newScreen = currentScreen.OptionSelected(enteredNumber);
 
-                    if (newScreen != null)
-                    {
-                        _screens.Push(newScreen);
-                        _currentBuffer = "";
-                    }
-                    else
+                    if (newScreen == null)
                     {
                         _screens.Pop();
                         _currentBuffer = "";
+                        _acceptingInput = false;
 
                         if (!_screens.Any())
                         {
@@ -163,6 +165,11 @@ public class Terminal : MonoBehaviour
                             return;
                         }
                     }
+                    else if (!newScreen.Equals(currentScreen))
+                        _screens.Push(newScreen);
+
+                    _currentBuffer = "";
+                    _acceptingInput = false;
                 }
 
                 _input = "";

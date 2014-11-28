@@ -10,18 +10,16 @@ class LivingQuartersTerminal : ScreenBehahvior
             if (WorldState.HasHappened(WorldEvent.StartInfoAvailable) &&
                !WorldState.HasHappened(WorldEvent.StartInfoRead))
             {
-                return new ScreenInfo("Sorry to wake you at this\nhour. Bladididblabla", new List<ScreenAction>
+                return new ScreenInfo("!!! EMERGENCY !!!\n\n" +
+                                      "- ASTEROID STORM DETECTED\n" +
+                                      "- COURSE HAS BEEN DIVERTED \n" +
+                                      "- ASTEROID HIT DETECTED\n" +
+                                      "- FIRE BETWEEN ENGINEERING AND GREENHOUSE\n" +
+                                      "- ENGINES OFFLINE, SHIP TUMBLING FREE\n\n", new List<ScreenAction>
                 {
-                    new ScreenAction("Do a backflip", () =>
+                    new ScreenAction("Dismiss warning", () =>
                     {
                         WorldState.SetHappened(WorldEvent.StartInfoRead);
-                        Debug.Log("Doing a backflip");
-                        return this;
-                    }),
-                    new ScreenAction("Blow up", () =>
-                    {
-                        WorldState.SetHappened(WorldEvent.StartInfoRead);
-                        Debug.Log("Blew up, a lot");
                         return this;
                     })
                 });

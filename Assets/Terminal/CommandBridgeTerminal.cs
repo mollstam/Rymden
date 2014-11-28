@@ -6,9 +6,9 @@ namespace Assets.Terminal
     static class CommandBridgeTerminalConstants
     {
         public static string HeatWarning =
-            "!!! CAUTION, HIGH HEAT IN ENGINEERING !!!\n\n" +
-            "!!! ENGINES NEED DIAGNOSTICS !!!\n\n" +
-            "!!! MAKING A BURN MIGHT CAUSE PERMANENT DAMAGE !!!\n\n";
+            "!!! CAUTION, HIGH HEAT IN ENGINEERING !!!\n" +
+            "!!! ENGINES NEED DIAGNOSTICS !!!\n" +
+            "!!! MAKING A BURN MIGHT CAUSE PERMANENT DAMAGE !!!\n";
     }
 
     class CommandBridgeTerminalPlotCourse : ScreenBehahvior
@@ -69,8 +69,8 @@ namespace Assets.Terminal
                     return new ScreenInfo(
                         "Ship Navigational Computer\n" +
                         "--------------------------\n\n" +
-                        "!!! MAKING NAVIGATIONAL BURN TORWARDS " + destination + " !!!\n\n" +
-                        "!!! ENGINES OVERHEATING !!!\n\n" +
+                        "!!! MAKING NAVIGATIONAL BURN TORWARDS " + destination + " !!!\n" +
+                        "!!! ENGINES OVERHEATING !!!\n" +
                         "",
 
                         new List<ScreenAction>
