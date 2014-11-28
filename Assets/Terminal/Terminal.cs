@@ -4,10 +4,25 @@ using System.Globalization;
 using System.Linq;
 using UnityEngine;
 
+public class ScreenAction
+{
+    public ScreenAction(string label, Action action)
+    {
+        if (label == null)
+            throw new NullReferenceException("label");
+
+        Label = label;
+        Action = action;
+    }
+
+    public string Label { get; private set; }
+    public Action Action { get; private set; }
+}
+
 public interface ScreenBehahvior
 {
     string Text { get; }
-    List<Action> Options { get; }
+    List<ScreenAction> Options { get; }
 }
 
 public class Screen
@@ -21,7 +36,21 @@ public class Screen
 
     public string Text
     {
-        get { return _behavior.Text; }
+        get
+        {
+            var text =  _behavior.Text;
+
+            if (_behavior.Options.Any())
+            {
+                text += "\n";
+
+                for (var i = 0; i < _behavior.Options.Count(); ++i)
+                    text += "\n" + (i + 1).ToString(CultureInfo.InvariantCulture) + " " + _behavior.Options[i].Label;
+            }
+
+            text += "\n\n> ";
+            return text;
+        }
     }
 
     public void OptionSelected(int option)
@@ -31,7 +60,7 @@ public class Screen
         if (index < 0 || index >= _behavior.Options.Count)
             return;
 
-        _behavior.Options[index]();
+        _behavior.Options[index].Action();
     }
 }
 
@@ -39,16 +68,16 @@ class TestScreenBehavior : ScreenBehahvior
 {
     public TestScreenBehavior()
     {
-        Text = "This is an awesome test, please\nchoose something:\n\n1. Do a backflip\n2. Blow up\n\n> ";
-        Options = new List<Action>
+        Text = "This is an awesome test, please\nchoose something:";
+        Options = new List<ScreenAction>
         {
-            () => Debug.Log("Doing a backflip"),
-            () => Debug.Log("Blew up, a lot"),
+            new ScreenAction("Do a backflip", () => Debug.Log("Doing a backflip")),
+            new ScreenAction("Blow up", () => Debug.Log("Blew up, a lot"))
         };
     }
 
     public string Text { get; private set; }
-    public List<Action> Options { get; private set; }
+    public List<ScreenAction> Options { get; private set; }
 }
 
 public class Terminal : MonoBehaviour
@@ -68,7 +97,7 @@ public class Terminal : MonoBehaviour
         if (StartScreenName == null)
             throw new Exception("StartScreenName is null");
 
-        var startScreens = new Dictionary<string, Screen>()
+        var startScreens = new Dictionary<string, Screen>
         {
             {"TestScreen", new Screen(new TestScreenBehavior())}
         };

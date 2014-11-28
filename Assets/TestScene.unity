@@ -123,8 +123,8 @@ Transform:
   m_LocalPosition: {x: 2.21499991, y: -.115000002, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_Father: {fileID: 1964796008}
+  m_RootOrder: 3
 --- !u!114 &10589174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -555,10 +555,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0678255ce07d8a54b85f876773396874, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ComputerTexture: {fileID: 8400000, guid: ebdda7312f95e3144bd049f6710613bb, type: 2}
-  _computerTexture2D: {fileID: 0}
-  ComputerMaterial: {fileID: 2100000, guid: cb247e8ec6ac3a3458b1fc5ffd5b5369, type: 2}
-  _prevActive: {fileID: 0}
 --- !u!114 &672252837
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1053,6 +1049,7 @@ Transform:
   - {fileID: 1734113158}
   - {fileID: 21122135}
   - {fileID: 1642928968}
+  - {fileID: 10589173}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!1 &2016668096
