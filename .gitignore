@@ -6,3 +6,4 @@ UnityGenerated/
 *.csproj
 *.suo
 *.userprefs
+.DS_Store
