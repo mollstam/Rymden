@@ -391,14 +391,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 487567854}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03551af9a674a0a4e95c0cebf94dda3e, type: 3}
+  m_Script: {fileID: 11500000, guid: dc26bd0c49bac4d49ad5f03cca6fd112, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Frequency: 0
-  BaseStrobeTime: 1
-  RandomPartMin: .100000001
-  RandomPartMax: .5
-  MinIntensity: .699999988
+  LowAlpha: .930000007
+  HighAlpha: 1
+  BaseInterval: .0500000007
+  IntervalRandomMin: .0500000007
+  IntervalRandomMax: .200000003
+  BaseLowTime: .100000001
+  LowTimeRandomMin: .0500000007
+  LowTimeRandomMax: .100000001
 --- !u!1 &605566657
 GameObject:
   m_ObjectHideFlags: 0
@@ -1088,14 +1091,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 2016668096}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03551af9a674a0a4e95c0cebf94dda3e, type: 3}
+  m_Script: {fileID: 11500000, guid: dc26bd0c49bac4d49ad5f03cca6fd112, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Frequency: 2
-  BaseStrobeTime: 1
-  RandomPartMin: .5
-  RandomPartMax: 2
-  MinIntensity: .699999988
+  LowAlpha: .944999993
+  HighAlpha: 1
+  BaseInterval: .100000001
+  IntervalRandomMin: .0500000007
+  IntervalRandomMax: .200000003
+  BaseLowTime: .100000001
+  LowTimeRandomMin: .100000001
+  LowTimeRandomMax: .300000012
 --- !u!212 &2016668099
 SpriteRenderer:
   m_ObjectHideFlags: 0
