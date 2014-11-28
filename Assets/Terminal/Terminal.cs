@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using Assets.Terminal;
 using UnityEngine;
 
 public class ScreenAction
@@ -63,7 +64,7 @@ public class Screen
                 text += "\n";
 
                 for (var i = 0; i < options.Count(); ++i)
-                    text += "\n" + (i + 1).ToString(CultureInfo.InvariantCulture) + " " + options[i].Label;
+                    text += "\n" + (i + 1).ToString(CultureInfo.InvariantCulture) + ". " + options[i].Label;
             }
 
             text += "\n\n> ";
@@ -95,7 +96,8 @@ public class Terminal : MonoBehaviour
 {
     private static readonly Dictionary<string, Screen> StartScreens = new Dictionary<string, Screen>
     {
-        {"LivingQuartersTerminal", new Screen(new LivingQuartersTerminal())}
+        {"LivingQuartersTerminal", new Screen(new LivingQuartersTerminal())},
+        {"CommandBridgeTerminal", new Screen(new CommandBridgeTerminal())}
     };
 
     public float CharacterInterval = 0.01f;
@@ -116,6 +118,9 @@ public class Terminal : MonoBehaviour
 
         _acceptingInput = false;
         _currentBuffer = "";
+        _input = "";
+        _textMesh = gameObject.transform.FindChild("Text").GetComponent<TextMesh>();
+        _textMesh.text = "";
         _screens = new Stack<Screen>();
         AddScreen(startScreen);
         _addNextCharAt = 0.0f;
@@ -149,8 +154,14 @@ public class Terminal : MonoBehaviour
                     }
                     else
                     {
-                        HasQuit = true;
-                        return;
+                        _screens.Pop();
+                        _currentBuffer = "";
+
+                        if (!_screens.Any())
+                        {
+                            HasQuit = true;
+                            return;
+                        }
                     }
                 }
 
@@ -162,7 +173,6 @@ public class Terminal : MonoBehaviour
         }
         
         AppendText();
-        _textMesh = gameObject.transform.FindChild("Text").GetComponent<TextMesh>();
         _textMesh.text = _currentBuffer;
     }
 
