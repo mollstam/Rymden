@@ -2110,8 +2110,8 @@ TextMesh:
   m_GameObject: {fileID: 1009367629}
   m_Text: test test
   m_OffsetZ: -1
-  m_CharacterSize: 3
-  m_LineSpacing: 1
+  m_CharacterSize: 2
+  m_LineSpacing: 1.39999998
   m_Anchor: 0
   m_Alignment: 0
   m_TabSize: 4
