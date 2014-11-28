@@ -39,7 +39,7 @@ class TestScreenBehavior : ScreenBehahvior
 {
     public TestScreenBehavior()
     {
-        Text = "This is an awesome test,\nplease choose something:\n\n1. Do a backflip\n2. Blow up\n\n> ";
+        Text = "This is an awesome test, please\nchoose something:\n\n1. Do a backflip\n2. Blow up\n\n> ";
         Options = new List<Action>
         {
             () => Debug.Log("Doing a backflip"),
@@ -53,8 +53,9 @@ class TestScreenBehavior : ScreenBehahvior
 
 public class Terminal : MonoBehaviour
 {
+
     public float CharacterInterval = 0.01f;
-    public Screen StartScreen;
+    public string StartScreenName;
     private string _currentBuffer;
     private TextMesh _textMesh;
     private float _addNextCharAt;
@@ -64,15 +65,23 @@ public class Terminal : MonoBehaviour
 
     public void Start()
     {
-        StartScreen = new Screen(new TestScreenBehavior());
+        if (StartScreenName == null)
+            throw new Exception("StartScreenName is null");
 
-        if (StartScreen == null)
-            throw new Exception("StartScreen is null");
+        var startScreens = new Dictionary<string, Screen>()
+        {
+            {"TestScreen", new Screen(new TestScreenBehavior())}
+        };
+
+        Screen startScreen;
+
+        if (!startScreens.TryGetValue(StartScreenName, out startScreen))
+            throw new Exception("Couldn't find startscreen with name " + StartScreenName);
 
         _acceptingInput = false;
         _currentBuffer = "";
         _screens = new Stack<Screen>();
-        AddScreen(StartScreen);
+        AddScreen(startScreen);
         _addNextCharAt = 0.0f;
     }
 

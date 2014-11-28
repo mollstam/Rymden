@@ -444,6 +444,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CharacterInterval: .00999999978
+  StartScreenName: TestScreen
 --- !u!1 &672252829
 GameObject:
   m_ObjectHideFlags: 0
