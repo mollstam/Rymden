@@ -64,9 +64,9 @@ public class Screen
     }
 }
 
-class TestScreenBehavior : ScreenBehahvior
+class LivingQuartersTerminal : ScreenBehahvior
 {
-    public TestScreenBehavior()
+    public LivingQuartersTerminal()
     {
         Text = "This is an awesome test, please\nchoose something:";
         Options = new List<ScreenAction>
@@ -82,30 +82,25 @@ class TestScreenBehavior : ScreenBehahvior
 
 public class Terminal : MonoBehaviour
 {
+    private static Dictionary<string, Screen> _startScreens = new Dictionary<string, Screen>
+    {
+        {"LivingQuartersTerminal", new Screen(new LivingQuartersTerminal())}
+    };
 
     public float CharacterInterval = 0.01f;
-    public string StartScreenName;
     private string _currentBuffer;
     private TextMesh _textMesh;
     private float _addNextCharAt;
     private Stack<Screen> _screens;
     private bool _acceptingInput;
     private string _input;
-
-    public void Start()
+    
+    public void Reset(string startScreeName)
     {
-        if (StartScreenName == null)
-            throw new Exception("StartScreenName is null");
-
-        var startScreens = new Dictionary<string, Screen>
-        {
-            {"TestScreen", new Screen(new TestScreenBehavior())}
-        };
-
         Screen startScreen;
 
-        if (!startScreens.TryGetValue(StartScreenName, out startScreen))
-            throw new Exception("Couldn't find startscreen with name " + StartScreenName);
+        if (!_startScreens.TryGetValue(startScreeName, out startScreen))
+            throw new Exception("Couldn't find startscreen with name " + startScreeName);
 
         _acceptingInput = false;
         _currentBuffer = "";
@@ -116,6 +111,9 @@ public class Terminal : MonoBehaviour
 
     public void Update()
     {
+        if (!_screens.Any())
+            return;
+
         if (_currentBuffer == ScreenText())
             _acceptingInput = true;
 

@@ -4,16 +4,16 @@ public class RoomController : MonoBehaviour
 {
     public Transform StartingRoom;
     private Transform _currentRoom;
-    private Transform _currentTerminal;
+    private Transform _terminal;
+    private bool _inTerminal;
 
     public Transform ActiveTransform
     {
         get
         {
-            if (CurrentTerminal != null)
-                return CurrentTerminal;
-
-            return CurrentRoom;
+            return _inTerminal
+                ? _terminal
+                : CurrentRoom;
         }
     }
 
@@ -29,19 +29,18 @@ public class RoomController : MonoBehaviour
         }
     }
 
-    public Transform CurrentTerminal
+    public bool InTerminal
     {
-        get { return _currentTerminal; }
+        get { return _inTerminal; }
         set
         {
+            if (_inTerminal == value)
+                return;
+
             InactivateAllRooms();
-            _currentTerminal = value;
-
-            if (value == null)
-                _currentRoom.gameObject.SetActive(true);
-            else
-                _currentTerminal.gameObject.SetActive(true);
-
+            _inTerminal = value;
+            _currentRoom.gameObject.SetActive(!_inTerminal);
+            _terminal.gameObject.SetActive(_inTerminal);
             UpdateCameraPosition();
         }
     }
@@ -56,9 +55,9 @@ public class RoomController : MonoBehaviour
 
     private void UpdateCameraPosition()
     {
-        if (_currentTerminal != null)
+        if (InTerminal)
         {
-            var computerPos = _currentTerminal.position;
+            var computerPos = _terminal.position;
             transform.position = new Vector3(computerPos.x, computerPos.y, transform.position.z);
             return;
         }
@@ -69,6 +68,8 @@ public class RoomController : MonoBehaviour
 
     public void Start()
     {
+        _terminal = GameObject.Find("TerminalRoom").transform;
+        _inTerminal = false;
         CurrentRoom = StartingRoom;
     }
 
@@ -77,13 +78,13 @@ public class RoomController : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
             HandleLeftMouseClick();
 
-        if (CurrentTerminal != null && (Input.GetKeyDown(KeyCode.Escape) || Input.GetMouseButtonUp(1)))
-            CurrentTerminal = null;
+        if (_terminal && (Input.GetKeyDown(KeyCode.Escape) || Input.GetMouseButtonUp(1)))
+            InTerminal = false;
     }
 
     private void HandleLeftMouseClick()
     {
-        if (CurrentTerminal != null)
+        if (InTerminal)
             return;
 
         var doorways = GameObject.FindGameObjectsWithTag("DoorWay");
@@ -98,13 +99,14 @@ public class RoomController : MonoBehaviour
             }
         }
 
-        var terminals = GameObject.FindGameObjectsWithTag("Terminal");
+        var terminals = GameObject.FindGameObjectsWithTag("TerminalWay");
 
         foreach (var terminal in terminals)
         {
             if (terminal.collider2D.bounds.Contains(mousePosition))
             {
-                CurrentTerminal = terminal.GetComponent<DoorWay>().Target.transform;
+                InTerminal = true;
+                _terminal.GetComponent<Terminal>().Reset(terminal.GetComponent<TerminalWay>().StartScreenName);
                 return;
             }
         }
