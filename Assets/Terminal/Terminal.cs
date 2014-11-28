@@ -103,7 +103,7 @@ public class Terminal : MonoBehaviour
     private string _currentBuffer;
     private TextMesh _textMesh;
     private float _addNextCharAt;
-    private Stack<Screen> _screens;
+    private Stack<Screen> _screens = new Stack<Screen>();
     private bool _acceptingInput;
     private string _input;
     
