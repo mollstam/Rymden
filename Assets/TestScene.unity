@@ -582,7 +582,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4326f43ed77dc4a099ba7808ecba0be6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentSkin: {fileID: 11400000, guid: 86c2c877cd7fc4a0e9ebcdb0cd14bef1, type: 2}
+  SkinInstance: {fileID: 11400000, guid: 86c2c877cd7fc4a0e9ebcdb0cd14bef1, type: 2}
 --- !u!1001 &678751896
 Prefab:
   m_ObjectHideFlags: 0
