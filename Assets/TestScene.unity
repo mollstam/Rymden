@@ -542,7 +542,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd24289f2e78584cb7609004d494668, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartingRoom: {fileID: 2084265375}
+  StartingRoom: {fileID: 1964796008}
 --- !u!114 &672252836
 MonoBehaviour:
   m_ObjectHideFlags: 0
