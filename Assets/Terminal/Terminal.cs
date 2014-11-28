@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class ScreenAction
 {
-    public ScreenAction(string label, Action action)
+    public ScreenAction(string label, Func<ScreenBehahvior> action)
     {
         if (label == null)
             throw new NullReferenceException("label");
@@ -16,13 +16,30 @@ public class ScreenAction
     }
 
     public string Label { get; private set; }
-    public Action Action { get; private set; }
+    public Func<ScreenBehahvior> Action { get; private set; }
+}
+
+public class ScreenInfo
+{
+    public ScreenInfo(string text, List<ScreenAction> options)
+    {
+        if (text == null)
+            throw new ArgumentNullException("text");
+
+        if (options == null)
+            throw new ArgumentNullException("options");
+
+        Text = text;
+        Options = options;
+    }
+
+    public string Text { get; private set; }
+    public List<ScreenAction> Options { get; private set; }
 }
 
 public interface ScreenBehahvior
 {
-    string Text { get; }
-    List<ScreenAction> Options { get; }
+    ScreenInfo CurrentInfo { get; }
 }
 
 public class Screen
@@ -38,14 +55,15 @@ public class Screen
     {
         get
         {
-            var text =  _behavior.Text;
+            var text =  _behavior.CurrentInfo.Text;
+            var options = _behavior.CurrentInfo.Options;
 
-            if (_behavior.Options.Any())
+            if (options.Any())
             {
                 text += "\n";
 
-                for (var i = 0; i < _behavior.Options.Count(); ++i)
-                    text += "\n" + (i + 1).ToString(CultureInfo.InvariantCulture) + " " + _behavior.Options[i].Label;
+                for (var i = 0; i < options.Count(); ++i)
+                    text += "\n" + (i + 1).ToString(CultureInfo.InvariantCulture) + " " + options[i].Label;
             }
 
             text += "\n\n> ";
@@ -53,41 +71,35 @@ public class Screen
         }
     }
 
-    public void OptionSelected(int option)
+    public Screen OptionSelected(int option)
     {
         var index = option - 1;
 
-        if (index < 0 || index >= _behavior.Options.Count)
-            return;
+        var options = _behavior.CurrentInfo.Options;
 
-        _behavior.Options[index].Action();
+        if (index < 0 || index >= options.Count)
+            return this;
+
+        var newBehavior = options[index].Action();
+
+		if (newBehavior == null)
+			return null;
+
+        return newBehavior == _behavior
+            ? this
+            : new Screen(newBehavior);
     }
-}
-
-class LivingQuartersTerminal : ScreenBehahvior
-{
-    public LivingQuartersTerminal()
-    {
-        Text = "This is an awesome test, please\nchoose something:";
-        Options = new List<ScreenAction>
-        {
-            new ScreenAction("Do a backflip", () => Debug.Log("Doing a backflip")),
-            new ScreenAction("Blow up", () => Debug.Log("Blew up, a lot"))
-        };
-    }
-
-    public string Text { get; private set; }
-    public List<ScreenAction> Options { get; private set; }
 }
 
 public class Terminal : MonoBehaviour
 {
-    private static Dictionary<string, Screen> _startScreens = new Dictionary<string, Screen>
+    private static readonly Dictionary<string, Screen> StartScreens = new Dictionary<string, Screen>
     {
         {"LivingQuartersTerminal", new Screen(new LivingQuartersTerminal())}
     };
 
     public float CharacterInterval = 0.01f;
+    public bool HasQuit { get; set; }
     private string _currentBuffer;
     private TextMesh _textMesh;
     private float _addNextCharAt;
@@ -99,7 +111,7 @@ public class Terminal : MonoBehaviour
     {
         Screen startScreen;
 
-        if (!_startScreens.TryGetValue(startScreeName, out startScreen))
+        if (!StartScreens.TryGetValue(startScreeName, out startScreen))
             throw new Exception("Couldn't find startscreen with name " + startScreeName);
 
         _acceptingInput = false;
@@ -107,6 +119,7 @@ public class Terminal : MonoBehaviour
         _screens = new Stack<Screen>();
         AddScreen(startScreen);
         _addNextCharAt = 0.0f;
+        HasQuit = false;
     }
 
     public void Update()
@@ -126,7 +139,20 @@ public class Terminal : MonoBehaviour
                 int enteredNumber;
 
                 if (int.TryParse(_input, out enteredNumber))
-                    _screens.Peek().OptionSelected(enteredNumber);
+                {
+                    var newScreen = _screens.Peek().OptionSelected(enteredNumber);
+
+                    if (newScreen != null)
+                    {
+                        _screens.Push(newScreen);
+                        _currentBuffer = "";
+                    }
+                    else
+                    {
+                        HasQuit = true;
+                        return;
+                    }
+                }
 
                 _input = "";
             }

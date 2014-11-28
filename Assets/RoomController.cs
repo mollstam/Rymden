@@ -4,7 +4,7 @@ public class RoomController : MonoBehaviour
 {
     public Transform StartingRoom;
     private Transform _currentRoom;
-    private Transform _terminal;
+    private Terminal _terminal;
     private bool _inTerminal;
 
     public Transform ActiveTransform
@@ -12,7 +12,7 @@ public class RoomController : MonoBehaviour
         get
         {
             return _inTerminal
-                ? _terminal
+                ? _terminal.transform
                 : CurrentRoom;
         }
     }
@@ -57,7 +57,7 @@ public class RoomController : MonoBehaviour
     {
         if (InTerminal)
         {
-            var computerPos = _terminal.position;
+            var computerPos = _terminal.transform.position;
             transform.position = new Vector3(computerPos.x, computerPos.y, transform.position.z);
             return;
         }
@@ -68,13 +68,16 @@ public class RoomController : MonoBehaviour
 
     public void Start()
     {
-        _terminal = GameObject.Find("TerminalRoom").transform;
+        _terminal = GameObject.Find("TerminalRoom").GetComponent<Terminal>();
         _inTerminal = false;
         CurrentRoom = StartingRoom;
     }
 
     public void Update()
     {
+        if (InTerminal && _terminal.HasQuit)
+            InTerminal = false;
+
         if (Input.GetMouseButtonUp(0))
             HandleLeftMouseClick();
 
