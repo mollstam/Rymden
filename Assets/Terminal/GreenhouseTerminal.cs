@@ -3,7 +3,6 @@ using UnityEngine;
 
 namespace Assets.Terminal
 {
-
     class GreenhouseTerminal : ScreenBehahvior
     {
         public ScreenInfo CurrentInfo
@@ -39,6 +38,11 @@ namespace Assets.Terminal
                         new ScreenAction("Sign off", () => null)
                     });
             }
+        }
+
+        public bool ShowMessages
+        {
+            get { return true; }
         }
     }
 }
