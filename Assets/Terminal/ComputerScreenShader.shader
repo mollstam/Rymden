@@ -10,6 +10,8 @@
 		_StencilWriteMask ("Stencil Write Mask", Float) = 255
 		_StencilReadMask ("Stencil Read Mask", Float) = 255
 
+		_Distortion ("Distortion", Float) = 1
+
 		_ColorMask ("Color Mask", Float) = 15
 	}
 
@@ -67,6 +69,16 @@
 				sampler2D _MainTex;
 				float4 _MainTex_ST;
 				fixed4 _Color;
+				float _Distortion;
+
+				float2 radialDistortion(float2 coord)
+		        {
+		                float2 cc = coord - 0.5;
+		                float dist = dot(cc, cc) * _Distortion;
+		                return (coord + cc * (1.0 + dist) * dist);
+		        }
+
+
 
 				v2f vert (appdata_t v)
 				{
@@ -85,9 +97,9 @@
 				half4 frag (v2f i) : COLOR
 				{
 					half4 col = i.color;
-					col.a *= tex2D(_MainTex, i.texcoord).a;
+					float2 texcoord = radialDistortion(i.texcoord);
+					col.a *= tex2D(_MainTex, texcoord).a;
 					col = col * _Color;
-					col.x = i.texcoord.x;
 					clip (col.a - 0.01);
 					return col;
 				}
