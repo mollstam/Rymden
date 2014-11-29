@@ -13,7 +13,6 @@ namespace Assets.Terminal
 
     class CommandBridgeTerminalPlotCourse : ScreenBehahvior
     {
-
         public ScreenInfo CurrentInfo
         {
             get
@@ -50,6 +49,14 @@ namespace Assets.Terminal
             {
                 new ScreenAction("Sign off", () => null)
             });
+            }
+        }
+
+        public bool ShowMessages
+        {
+            get
+            {
+                return false;
             }
         }
     }
@@ -103,6 +110,14 @@ namespace Assets.Terminal
                     {
                         new ScreenAction("Sign off", () => null)
                     });
+            }
+        }
+
+        public bool ShowMessages
+        {
+            get
+            {
+                return true;
             }
         }
     }

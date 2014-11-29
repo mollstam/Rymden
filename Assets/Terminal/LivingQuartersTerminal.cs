@@ -31,4 +31,12 @@ class LivingQuartersTerminal : ScreenBehahvior
             });
         }
     }
+
+    public bool ShowMessages
+    {
+        get
+        {
+            return WorldState.HasHappened(WorldEvent.StartInfoRead);
+        }
+    }
 }

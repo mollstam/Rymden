@@ -36,15 +36,51 @@ public class TimedWorldEvent
     public WorldEvent WorldEvent { get; private set; }
 }
 
+public class Message
+{
+    public Message(string subject, string text)
+    {
+        Subject = subject;
+        Text = text;
+        Read = false;
+    }
+
+    public void MarkRead()
+    {
+        Read = true;
+    }
+    
+    public string Subject { get; private set; }
+    public string Text { get; private set; }
+    public bool Read { get; private set; }
+}
+
 public static class WorldState
 {
     static WorldState()
     {
         SetHappened(WorldEvent.StartInfoAvailable);
+        AddNewMessage("God Speed", "Good luck on your most important\njourney LOLS.");
     }
 
-    public static HashSet<WorldEvent> PastEvents = new HashSet<WorldEvent>();
-    public static List<TimedWorldEvent> FutureEvents = new List<TimedWorldEvent>();
+    private static readonly List<Message> Messages = new List<Message>();
+    private static readonly HashSet<WorldEvent> PastEvents = new HashSet<WorldEvent>();
+    private static readonly List<TimedWorldEvent> FutureEvents = new List<TimedWorldEvent>();
+
+    public static bool AnyNewMessages()
+    {
+        return Messages.Any(x => !x.Read);
+    }
+
+    public static void AddNewMessage(string subject, string text)
+    {
+        Messages.Add(new Message(subject, text));
+    }
+
+    public static List<Message> AllMessages()
+    {
+        return Messages;
+    }
 
     public static bool HasHappened(WorldEvent evt)
     {

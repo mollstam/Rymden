@@ -41,6 +41,7 @@ public class ScreenInfo
 public interface ScreenBehahvior
 {
     ScreenInfo CurrentInfo { get; }
+    bool ShowMessages { get; }
 }
 
 public class Screen
@@ -51,13 +52,13 @@ public class Screen
     {
         _behavior = behavior;
     }
-
+    
     public string Text
     {
         get
         {
             var text =  _behavior.CurrentInfo.Text;
-            var options = _behavior.CurrentInfo.Options;
+            var options = AllOptions();
 
             if (options.Any())
             {
@@ -76,7 +77,7 @@ public class Screen
     {
         var index = option - 1;
 
-        var options = _behavior.CurrentInfo.Options;
+        var options = AllOptions();
 
         if (index < 0 || index >= options.Count)
             return this;
@@ -94,6 +95,16 @@ public class Screen
     public bool Equals(Screen screen)
     {
         return screen._behavior == _behavior;
+    }
+
+    private List<ScreenAction> AllOptions()
+    {
+        var options = new List<ScreenAction>(_behavior.CurrentInfo.Options);
+
+        if (_behavior.ShowMessages)
+            options.Add(new ScreenAction("Messages", () => new MessagesScreen()));
+
+        return options;
     }
 }
 
