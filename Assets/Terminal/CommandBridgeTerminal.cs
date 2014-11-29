@@ -22,8 +22,7 @@ namespace Assets.Terminal
                     return new ScreenInfo(
                         "Plotting Course\n" +
                         "---------------\n\n" +
-                        CommandBridgeTerminalConstants.HeatWarning +
-                        "",
+                        CommandBridgeTerminalConstants.HeatWarning,
 
                         new List<ScreenAction>
                         {
@@ -45,10 +44,27 @@ namespace Assets.Terminal
                         });
                 }
 
-            return new ScreenInfo("Bye", new List<ScreenAction>
-            {
-                new ScreenAction("Sign off", () => null)
-            });
+                return new ScreenInfo(
+                        "Plotting Course\n" +
+                        "---------------\n\n" +
+                        "Please select one of these pre-programmed\ndestinations.",
+
+                        new List<ScreenAction>
+                        {
+                            new ScreenAction("To Earth", () =>
+                            {
+                                WorldState.SetFutureEvent(60, WorldEvent.PlottedForEarth);
+                                WorldState.SetFutureEvent(60, WorldEvent.End);
+                                return null;
+                            }),
+                            new ScreenAction("To Europa", () =>
+                            {
+                                WorldState.SetFutureEvent(60, WorldEvent.PlottedForEuropa);
+                                WorldState.SetFutureEvent(60, WorldEvent.End);
+                                return null;
+                            }),
+                            new ScreenAction("Exit", () => null)
+                        });
             }
         }
 
@@ -92,8 +108,7 @@ namespace Assets.Terminal
 
                         "Ship Navigational Computer\n" +
                         "--------------------------\n\n" +
-                        CommandBridgeTerminalConstants.HeatWarning +
-                        "",
+                        CommandBridgeTerminalConstants.HeatWarning,
 
                         new List<ScreenAction>
                         {
@@ -105,9 +120,10 @@ namespace Assets.Terminal
                 return new ScreenInfo(
                     "Ship Navigational Computer\n" +
                     "--------------------------\n\n",
-                    
+
                     new List<ScreenAction>
                     {
+                        new ScreenAction("Plot course", () => new CommandBridgeTerminalPlotCourse()),
                         new ScreenAction("Sign off", () => null)
                     });
             }
