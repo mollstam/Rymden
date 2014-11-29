@@ -22,7 +22,9 @@ namespace Assets.Terminal
                             new ScreenAction("Flush oxygen in greenhouse", () =>
                             {
                                 WorldState.SetHappened(WorldEvent.VentGreenHouseOutside);
-                                WorldState.AddNewMessage("URGENT: Other ship destroyed", "Hello there Astronaut! The other ship went boom,\nyou are now alone and it is more important\nthat you reach your goal.\n\nTake care, Earth.");
+                                WorldState.AddHappenSometimeBefore(Time.time + 20, () => {
+                                    WorldState.AddNewMessage("URGENT: Other ship destroyed", "Hello there Astronaut! The other ship went boom,\nyou are now alone and it is more important\nthat you reach your goal.\n\nTake care, Earth.");
+                                });
                                 return null;
                             }),
                             new ScreenAction("Sign off", () => null)
