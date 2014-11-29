@@ -135,6 +135,7 @@ public class Terminal : MonoBehaviour
     private bool _inUse;
 
     public string ScreenName;
+    public float CameraSize = 1.0f;
 
     public string Buffer
     {

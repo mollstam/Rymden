@@ -42,7 +42,7 @@ public class TerminalRenderer : MonoBehaviour {
 
             GUI.skin = RymdenGUI.TerminalSkin;
             int padding = 10;
-            GUILayout.BeginArea(new Rect(padding, padding, UnityEngine.Screen.width - padding * 2, UnityEngine.Screen.height - padding * 2));
+            GUILayout.BeginArea(new Rect(padding, padding, _renderData.width - padding * 2, _renderData.height - padding * 2));
             GUILayout.Label(_terminal.Buffer, TerminalStyle);
             GUILayout.EndArea();
 
