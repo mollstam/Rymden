@@ -11,7 +11,7 @@ public class CameraSway : MonoBehaviour
 
     public void Update()
     {
-        if (_roomTransitionAnimator.IsAnimating)
+        if (_roomTransitionAnimator.IsAnimating || GetComponent<RoomController>().InTerminal)
             return;
 
         var currentRoomPos = GetComponent<RoomController>().ActiveTransform.position;
