@@ -31,17 +31,12 @@ public class TooltipHandler : MonoBehaviour {
         }
     }
 
-    public void Start()
-    {
-        _rect = new Rect(10, UnityEngine.Screen.height - 30, UnityEngine.Screen.width - 20, 30);
-    }
-
     public void OnGUI()
     {
         if (_currentTooltip != null)
         {
             GUI.skin = RymdenGUI.Skin;
-            GUI.Label(_rect, _currentTooltip.Text);
+            GUI.Label(new Rect(10, UnityEngine.Screen.height - 30, UnityEngine.Screen.width - 20, 30), _currentTooltip.Text);
         }
     }
 
