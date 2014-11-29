@@ -1,5 +1,6 @@
 ﻿// This class knows the progress the player has made and it is used by for example computers to control what to show.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -24,16 +25,16 @@ public enum WorldEvent
     End
 };
 
-public class TimedWorldEvent
+public class ConditionedAction
 {
-    public TimedWorldEvent(float time, WorldEvent worldEvent)
+    public ConditionedAction(Func<bool> predicate, Action action)
     {
-        Time = time;
-        WorldEvent = worldEvent;
+        Predicate = predicate;
+        Action = action;
     }
 
-    public float Time { get; private set; }
-    public WorldEvent WorldEvent { get; private set; }
+    public Func<bool> Predicate { get; private set; }
+    public Action Action { get; private set; }
 }
 
 public class Message
@@ -65,7 +66,7 @@ public static class WorldState
 
     private static readonly List<Message> Messages = new List<Message>();
     private static readonly HashSet<WorldEvent> PastEvents = new HashSet<WorldEvent>();
-    private static readonly List<TimedWorldEvent> FutureEvents = new List<TimedWorldEvent>();
+    private static readonly List<ConditionedAction> ConditionedActions = new List<ConditionedAction>();
 
     public static bool AnyNewMessages()
     {
@@ -99,7 +100,9 @@ public static class WorldState
 
     public static void SetFutureEvent(float time, WorldEvent evt)
     {
-        FutureEvents.Add(new TimedWorldEvent(time, evt));
+        ConditionedActions.Add(new ConditionedAction(
+            () => Time.time > time,
+            () => SetHappened(evt)));
     }
 
     public static bool HasEndState()
@@ -114,17 +117,15 @@ public static class WorldState
 
     public static void Update()
     {
-        var time = Time.time;
-
-        foreach (var timedEvent in FutureEvents)
+        foreach (var conditionedAction in ConditionedActions)
         {
-            if (time <= timedEvent.Time)
+            if (!conditionedAction.Predicate())
                 continue;
 
-            PastEvents.Add(timedEvent.WorldEvent);
+            conditionedAction.Action();
         }
 
-        FutureEvents.RemoveAll(x => time > x.Time);
+        ConditionedActions.RemoveAll(x => x.Predicate());
 
         if (HasEndState())
             Debug.Log("END");
