@@ -42,6 +42,7 @@ public interface ScreenBehahvior
 {
     ScreenInfo CurrentInfo { get; }
     bool ShowMessages { get; }
+    bool ShowMap { get; }
 }
 
 public class Screen
@@ -103,6 +104,9 @@ public class Screen
 
         if (_behavior.ShowMessages)
             options.Add(new ScreenAction("Messages" + (WorldState.AnyNewMessages() ? " [Unread]" : ""), () => new MessagesScreen()));
+
+        if (_behavior.ShowMap)
+            options.Add(new ScreenAction("Map", () => new MapScreen()));
 
         return options;
     }

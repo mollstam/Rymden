@@ -70,10 +70,12 @@ namespace Assets.Terminal
 
         public bool ShowMessages
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
+        }
+
+        public bool ShowMap
+        {
+            get { return false; }
         }
     }
 
@@ -131,10 +133,12 @@ namespace Assets.Terminal
 
         public bool ShowMessages
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
+        }
+
+        public bool ShowMap
+        {
+            get { return true; }
         }
     }
 }

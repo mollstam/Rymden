@@ -50,5 +50,10 @@ namespace Assets.Terminal
         {
             get { return true; }
         }
+
+        public bool ShowMap
+        {
+            get { return true; }
+        }
     }
 }

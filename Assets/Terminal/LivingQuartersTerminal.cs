@@ -15,7 +15,7 @@ class LivingQuartersTerminal : ScreenBehahvior
                                       "- COURSE HAS BEEN DIVERTED \n" +
                                       "- ASTEROID HIT DETECTED\n" +
                                       "- FIRE BETWEEN ENGINEERING AND GREENHOUSE\n" +
-                                      "- ENGINES OFFLINE, SHIP TUMBLING FREE\n\n", new List<ScreenAction>
+                                      "- ENGINES OFFLINE, SHIP TUMBLING FREE\n", new List<ScreenAction>
                 {
                     new ScreenAction("Dismiss warning", () =>
                     {
@@ -25,7 +25,9 @@ class LivingQuartersTerminal : ScreenBehahvior
                 });
             }
 
-            return new ScreenInfo("Bye", new List<ScreenAction>
+            return new ScreenInfo("Bye",
+    
+            new List<ScreenAction>
             {
                 new ScreenAction("Sign off", () => null)
             });
@@ -38,5 +40,10 @@ class LivingQuartersTerminal : ScreenBehahvior
         {
             return WorldState.HasHappened(WorldEvent.StartInfoRead);
         }
+    }
+
+    public bool ShowMap
+    {
+        get { return WorldState.HasHappened(WorldEvent.StartInfoRead); }
     }
 }

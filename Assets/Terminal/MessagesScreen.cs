@@ -34,6 +34,11 @@ namespace Assets.Terminal
         {
             get { return false; }
         }
+
+        public bool ShowMap
+        {
+            get { return false; }
+        }
     }
 
     public class MessagesScreen : ScreenBehahvior
@@ -67,6 +72,11 @@ namespace Assets.Terminal
         }
 
         public bool ShowMessages
+        {
+            get { return false; }
+        }
+
+        public bool ShowMap
         {
             get { return false; }
         }
