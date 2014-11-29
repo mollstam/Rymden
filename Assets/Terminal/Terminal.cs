@@ -48,9 +48,11 @@ public interface ScreenBehahvior
 public class Screen
 {
     private ScreenBehahvior _behavior;
+    private RoomType _roomType;
 
-    public Screen(ScreenBehahvior behavior)
+    public Screen(RoomType roomType, ScreenBehahvior behavior)
     {
+        _roomType = roomType;
         _behavior = behavior;
     }
     
@@ -90,7 +92,7 @@ public class Screen
 
         return newBehavior == _behavior
             ? this
-            : new Screen(newBehavior);
+            : new Screen(_roomType, newBehavior);
     }
 
     public bool Equals(Screen screen)
@@ -106,7 +108,7 @@ public class Screen
             options.Add(new ScreenAction("Messages" + (WorldState.AnyNewMessages() ? " [Unread]" : ""), () => new MessagesScreen()));
 
         if (_behavior.ShowMap)
-            options.Add(new ScreenAction("Map", () => new MapScreen()));
+            options.Add(new ScreenAction("Map", () => new MapScreen(_roomType)));
 
         return options;
     }
@@ -116,11 +118,11 @@ public class Terminal : MonoBehaviour
 {
     private static readonly Dictionary<string, Screen> StartScreens = new Dictionary<string, Screen>
     {
-        {"LivingQuartersTerminal", new Screen(new LivingQuartersTerminal())},
-        {"CommandBridgeTerminal", new Screen(new CommandBridgeTerminal())},
-        {"GreenhouseTerminal", new Screen(new GreenhouseTerminal())},
-        {"ScienceLabTerminal", new Screen(new ScienceLabTerminal())},
-        {"EngineeringScreen", new Screen(new EngineeringScreen())}
+        {"LivingQuartersTerminal", new Screen(RoomType.LivingQuarters, new LivingQuartersTerminal())},
+        {"CommandBridgeTerminal", new Screen(RoomType.Bridge,new CommandBridgeTerminal())},
+        {"GreenhouseTerminal", new Screen(RoomType.Greenhouse,new GreenhouseTerminal())},
+        {"ScienceLabTerminal", new Screen(RoomType.ScienceLab,new ScienceLabTerminal())},
+        {"EngineeringScreen", new Screen(RoomType.Engineering,new EngineeringScreen())}
     };
 
     public float CharacterInterval = 0.01f;
