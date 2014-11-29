@@ -1,9 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Assets.Terminal
 {
     public class MapScreen : ScreenBehahvior
     {
+        private RoomType _roomType;
+
+        public MapScreen(RoomType roomType)
+        {
+            _roomType = roomType;
+        }
+
         public ScreenInfo CurrentInfo
         {
             get
@@ -15,8 +23,8 @@ namespace Assets.Terminal
        /   1   \ v Ladder down  / |     \   
       /_________\              /     8   \ 
       |    |    |              |  |_ ____| 
-      |    |  v |              |    |  ^ | 
-      | 2     3 |              | 5  |  6 | 
+      |    |  v |  x: You are  |    |  ^ | 
+      | 2     3 |      here    | 5  |  6 | 
       |_  _|____|              |_  _|_  _| 
       |       4 |              |    7    | 
       |_________|              |_________| 
@@ -25,7 +33,7 @@ namespace Assets.Terminal
 
     1: Supplies  2: Greenhouse  3: Science Lab
         4: Engineering  5: Living Quarters
-    6: Medical Bay  7: Dining Hall  8: Bridge",
+    6: Medical Bay  7: Dining Hall  8: Bridge".Replace(RoomTypeToChar(_roomType), "<color=#ff0000>x</color>"),
 
                     new List<ScreenAction>
                     {
@@ -42,6 +50,22 @@ namespace Assets.Terminal
         public bool ShowMap
         {
             get { return false; }
+        }
+
+        private string RoomTypeToChar(RoomType type)
+        {
+            switch (type)
+            {
+                case RoomType.LivingQuarters: return "5";
+                case RoomType.Bridge: return "8";
+                case RoomType.DiningRoom: return "7";
+                case RoomType.Medbay: return "6";
+                case RoomType.ScienceLab: return "3";
+                case RoomType.Greenhouse: return "2";
+                case RoomType.Engineering: return "4";
+            }
+
+            throw new NotImplementedException("Unkown room type");
         }
     }
 }
