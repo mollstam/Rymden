@@ -12,8 +12,17 @@ public class RymdenGUI : MonoBehaviour {
             return Instance.SkinInstance;
         }
     }
+    public static GUISkin TerminalSkin
+    {
+        get {
+            if (Instance == null)
+                Instance = GameObject.Find("Main Camera").GetComponent<RymdenGUI>();
+            return Instance.TerminalSkinInstance;
+        }
+    }
 
     public GUISkin SkinInstance;
+    public GUISkin TerminalSkinInstance;
 
     public void OnGUI()
     {

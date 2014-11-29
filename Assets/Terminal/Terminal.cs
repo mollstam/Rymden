@@ -126,11 +126,18 @@ public class Terminal : MonoBehaviour
     public float CharacterInterval = 0.01f;
     public bool HasQuit { get; set; }
     private string _currentBuffer;
-    private TextMesh _textMesh;
     private float _addNextCharAt;
     private Stack<Screen> _screens = new Stack<Screen>();
     private bool _acceptingInput;
     private string _input;
+
+    public string Buffer
+    {
+        get
+        {
+            return _currentBuffer;
+        }
+    }
     
     public void Reset(string startScreeName)
     {
@@ -142,8 +149,6 @@ public class Terminal : MonoBehaviour
         _acceptingInput = false;
         _currentBuffer = "";
         _input = "";
-        _textMesh = gameObject.transform.FindChild("Text").GetComponent<TextMesh>();
-        _textMesh.text = "";
         _screens = new Stack<Screen>();
         AddScreen(startScreen);
         _addNextCharAt = 0.0f;
@@ -198,7 +203,6 @@ public class Terminal : MonoBehaviour
         }
         
         AppendText();
-        _textMesh.text = _currentBuffer;
     }
 
     private void AcceptInput()
