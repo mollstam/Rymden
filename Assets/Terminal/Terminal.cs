@@ -115,7 +115,8 @@ public class Terminal : MonoBehaviour
         {"LivingQuartersTerminal", new Screen(new LivingQuartersTerminal())},
         {"CommandBridgeTerminal", new Screen(new CommandBridgeTerminal())},
         {"GreenhouseTerminal", new Screen(new GreenhouseTerminal())},
-        {"ScienceLabTerminal", new Screen(new ScienceLabTerminal())}
+        {"ScienceLabTerminal", new Screen(new ScienceLabTerminal())},
+        {"EngineeringScreen", new Screen(new EngineeringScreen())}
     };
 
     public float CharacterInterval = 0.01f;
