@@ -49,6 +49,10 @@ Material:
         first:
           name: _ColorMask
         second: 15
+      data:
+        first:
+          name: _Distortion
+        second: 0
     m_Colors:
       data:
         first:
