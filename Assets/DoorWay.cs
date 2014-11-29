@@ -14,14 +14,17 @@ public class DoorWay : MonoBehaviour
 
     public void Update()
     {
-        Vector2 mouseWorldSpace = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        if (collider2D.OverlapPoint(mouseWorldSpace))
+        if (_tooltip != null)
         {
-            _tooltip.Show();
-        }
-        else
-        {
-            _tooltip.Hide();
+            Vector2 mouseWorldSpace = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            if (collider2D.OverlapPoint(mouseWorldSpace))
+            {
+                _tooltip.Show();
+            }
+            else
+            {
+                _tooltip.Hide();
+            }
         }
     }
 }

@@ -102,7 +102,9 @@ public class Terminal : MonoBehaviour
     private static readonly Dictionary<string, Screen> StartScreens = new Dictionary<string, Screen>
     {
         {"LivingQuartersTerminal", new Screen(new LivingQuartersTerminal())},
-        {"CommandBridgeTerminal", new Screen(new CommandBridgeTerminal())}
+        {"CommandBridgeTerminal", new Screen(new CommandBridgeTerminal())},
+        {"GreenhouseTerminal", new Screen(new GreenhouseTerminal())},
+        {"ScienceLabTerminal", new Screen(new ScienceLabTerminal())}
     };
 
     public float CharacterInterval = 0.01f;

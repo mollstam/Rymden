@@ -11,7 +11,7 @@ public enum WorldEvent
     EngineOverheating,
     EngineBlownUp,
     VentGreenHouseInside,
-    VentGreenHOuseOutside,
+    VentGreenHouseOutside,
     OxygenInfoAvailable,
     OxygenInfoRead,
     ShipmentFailureInfoAvailable,
