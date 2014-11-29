@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Assets.Terminal
 {
@@ -23,6 +24,20 @@ namespace Assets.Terminal
                     {
                         new ScreenAction("Exit", () =>
                         {
+                            if (!WorldState.HasHappened(WorldEvent.DiagnosticRun))
+                            {
+                                var currentTime = Time.time;
+                                WorldState.AddConditionedAction(new ConditionedAction(
+                                    () => Time.time > currentTime + 20,
+                                    () => WorldState.AddNewMessage("We REALLY need the supplies!",
+                                        "Hi, we just want to make really really sure\n" +
+                                        "that your supplies reach us!! You've probably\n" +
+                                        "heard that the supply ship before you was\n" +
+                                        "destroyed by the asteroid storm. We MUST have\n" +
+                                        "your supplies or face starvation.\n\n" +
+                                        "Regards,\nMilek Baviddori\nAdministrator of EUROPA II")));
+                            }
+
                             WorldState.SetHappened(WorldEvent.DiagnosticRun);
                             return null;
                         })
@@ -51,17 +66,7 @@ namespace Assets.Terminal
 
                         new List<ScreenAction>
                         {
-                            new ScreenAction("Run engine diagnostics", () =>
-                            {
-                                WorldState.AddNewMessage("We REALLY need the supplies!", 
-                                    "Hi, we just want to make really really sure\n" +
-                                    "that your supplies reach us!! You've probably\n" +
-                                    "heard that the supply ship before you was\n" +
-                                    "destroyed by the asteroid storm. We MUST have\n" +
-                                    "your supplies or face starvation.\n\n" +
-                                    "Regards,\nMilek Baviddori\nAdministrator of EUROPA II");
-                                return new EngineeringDiagnosticsScreen();
-                            }),
+                            new ScreenAction("Run engine diagnostics", () => new EngineeringDiagnosticsScreen()),
                             new ScreenAction("Sign off", () => null)
                         });
                 }
