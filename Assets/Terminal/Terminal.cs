@@ -102,7 +102,7 @@ public class Screen
         var options = new List<ScreenAction>(_behavior.CurrentInfo.Options);
 
         if (_behavior.ShowMessages)
-            options.Add(new ScreenAction("Messages", () => new MessagesScreen()));
+            options.Add(new ScreenAction("Messages" + (WorldState.AnyNewMessages() ? " [Unread]" : ""), () => new MessagesScreen()));
 
         return options;
     }
