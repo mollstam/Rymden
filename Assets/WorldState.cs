@@ -105,6 +105,26 @@ public static class WorldState
             () => SetHappened(evt)));
     }
 
+    public static void AddHappenSometimeBefore(float time, Action action)
+    {
+        AddHappenSometimeBetween(Time.time, time, action);
+    }
+
+    public static void AddHappenSometimeBetween(float earliest, float latest, Action action)
+    {
+        float timeSpan = latest - earliest;
+        float runAtTime = earliest + (timeSpan * UnityEngine.Random.value);
+
+        ConditionedActions.Add(new ConditionedAction(
+            () => Time.time > runAtTime,
+            action));
+    }
+
+    public static void AddConditionedAction(ConditionedAction action)
+    {
+        ConditionedActions.Add(action);
+    }
+
     public static bool HasEndState()
     {
         return new[]
