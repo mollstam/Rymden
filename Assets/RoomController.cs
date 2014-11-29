@@ -7,7 +7,6 @@ public class RoomController : MonoBehaviour
     private Terminal _terminal;
     private bool _inTerminal;
     private float _roomCameraSize;
-    private float _terminalCameraSize = 0.83f;
 
     private static RoomController instance;
     private RoomTransitionAnimator _roomTransitionAnimator;
@@ -82,7 +81,7 @@ public class RoomController : MonoBehaviour
         {
             var computerPos = _terminal.transform.position;
             transform.position = new Vector3(computerPos.x, computerPos.y, transform.position.z);
-            camera.orthographicSize = _terminalCameraSize;
+            camera.orthographicSize = _terminal.CameraSize;
             return;
         }
 

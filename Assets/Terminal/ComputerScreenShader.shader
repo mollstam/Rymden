@@ -87,6 +87,7 @@
 					half4 col = i.color;
 					col.a *= tex2D(_MainTex, i.texcoord).a;
 					col = col * _Color;
+					col.x = i.texcoord.x;
 					clip (col.a - 0.01);
 					return col;
 				}

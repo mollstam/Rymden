@@ -841,6 +841,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CharacterInterval: .00999999978
   ScreenName: ScienceLabTerminal
+  CameraSize: 1
 --- !u!1 &243824944
 GameObject:
   m_ObjectHideFlags: 0
@@ -2340,6 +2341,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CharacterInterval: .00999999978
   ScreenName: CommandBridgeTerminal
+  CameraSize: 1
 --- !u!1 &826058261
 GameObject:
   m_ObjectHideFlags: 0
@@ -2366,8 +2368,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 826058261}
   m_LocalRotation: {x: 9.9999977e-07, y: -.707106829, z: .707106829, w: -9.9999977e-07}
-  m_LocalPosition: {x: -.159999996, y: -.569999993, z: -1}
-  m_LocalScale: {x: .134719983, y: .0757794231, z: .0841995925}
+  m_LocalPosition: {x: -.192000002, y: -.508000016, z: -1}
+  m_LocalScale: {x: .121435985, y: .0702348277, z: .0637601912}
   m_Children: []
   m_Father: {fileID: 2084265375}
   m_RootOrder: 0
@@ -2481,6 +2483,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CharacterInterval: .00999999978
   ScreenName: EngineeringScreen
+  CameraSize: 1
 --- !u!1 &848356130
 GameObject:
   m_ObjectHideFlags: 0
@@ -2996,6 +2999,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CharacterInterval: .00999999978
   ScreenName: GreenhouseTerminal
+  CameraSize: 1
 --- !u!1 &1377471060
 GameObject:
   m_ObjectHideFlags: 0
@@ -3681,8 +3685,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1652041679}
   m_LocalRotation: {x: 1.37835741e-06, y: -.707106888, z: .707106709, w: -1.49703169e-06}
-  m_LocalPosition: {x: 2.38000011, y: .850000024, z: -1}
-  m_LocalScale: {x: .189675674, y: .106692389, z: .118547104}
+  m_LocalPosition: {x: 2.39100003, y: .916000009, z: -1}
+  m_LocalScale: {x: .165424541, y: .0930510163, z: .0887344331}
   m_Children: []
   m_Father: {fileID: 1964796008}
   m_RootOrder: 4
@@ -3796,6 +3800,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CharacterInterval: .00999999978
   ScreenName: LivingQuartersTerminal
+  CameraSize: .649999976
 --- !u!1 &1715153464
 GameObject:
   m_ObjectHideFlags: 0
