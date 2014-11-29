@@ -2118,6 +2118,7 @@ GameObject:
   - 4: {fileID: 911178501}
   - 23: {fileID: 911178500}
   - 102: {fileID: 911178499}
+  - 114: {fileID: 911178502}
   m_Layer: 0
   m_Name: Greenhouse
   m_TagString: Room
@@ -2184,6 +2185,18 @@ Transform:
   - {fileID: 1648579601}
   m_Father: {fileID: 0}
   m_RootOrder: 9
+--- !u!114 &911178502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 911178498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1223beb6ce039439d9a50a3696af4b62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Type: 5
 --- !u!1 &1009367629
 GameObject:
   m_ObjectHideFlags: 0
@@ -2264,6 +2277,7 @@ GameObject:
   - 4: {fileID: 1038762824}
   - 23: {fileID: 1038762826}
   - 102: {fileID: 1038762825}
+  - 114: {fileID: 1038762827}
   m_Layer: 0
   m_Name: ScienceLab
   m_TagString: Room
@@ -2330,6 +2344,18 @@ Renderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
+--- !u!114 &1038762827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1038762823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1223beb6ce039439d9a50a3696af4b62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Type: 4
 --- !u!1 &1039770084
 GameObject:
   m_ObjectHideFlags: 0
@@ -2444,6 +2470,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1377471061}
+  - 114: {fileID: 1377471062}
   m_Layer: 0
   m_Name: DiningRoom
   m_TagString: Room
@@ -2466,6 +2493,18 @@ Transform:
   - {fileID: 73548963}
   m_Father: {fileID: 0}
   m_RootOrder: 7
+--- !u!114 &1377471062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1377471060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1223beb6ce039439d9a50a3696af4b62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Type: 2
 --- !u!1 &1396601118
 GameObject:
   m_ObjectHideFlags: 0
@@ -3064,6 +3103,7 @@ GameObject:
   - 4: {fileID: 1715153465}
   - 23: {fileID: 1715153467}
   - 102: {fileID: 1715153466}
+  - 114: {fileID: 1715153468}
   m_Layer: 0
   m_Name: Bridge
   m_TagString: Room
@@ -3128,6 +3168,18 @@ Renderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
+--- !u!114 &1715153468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1715153464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1223beb6ce039439d9a50a3696af4b62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Type: 1
 --- !u!1 &1725044862
 GameObject:
   m_ObjectHideFlags: 0
@@ -3460,6 +3512,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1811795731}
+  - 114: {fileID: 1811795732}
   m_Layer: 0
   m_Name: Medbay
   m_TagString: Room
@@ -3483,6 +3536,18 @@ Transform:
   - {fileID: 377437197}
   m_Father: {fileID: 0}
   m_RootOrder: 5
+--- !u!114 &1811795732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1811795730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1223beb6ce039439d9a50a3696af4b62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Type: 3
 --- !u!1001 &1812032313
 Prefab:
   m_ObjectHideFlags: 0
@@ -3655,6 +3720,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1964796008}
+  - 114: {fileID: 1964796009}
   m_Layer: 0
   m_Name: LivingQuarters
   m_TagString: Room
@@ -3679,6 +3745,18 @@ Transform:
   - {fileID: 2102999430}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &1964796009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1964796007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1223beb6ce039439d9a50a3696af4b62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Type: 0
 --- !u!1001 &2005215174
 Prefab:
   m_ObjectHideFlags: 0
@@ -3970,6 +4048,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 2084265375}
   - 212: {fileID: 2084265376}
+  - 114: {fileID: 2084265377}
   m_Layer: 0
   m_Name: Engineering
   m_TagString: Room
@@ -4016,6 +4095,18 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!114 &2084265377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2084265374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1223beb6ce039439d9a50a3696af4b62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Type: 6
 --- !u!1 &2102999426
 GameObject:
   m_ObjectHideFlags: 0
