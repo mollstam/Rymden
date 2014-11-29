@@ -52,6 +52,10 @@ Material:
       data:
         first:
           name: _Distortion
+        second: .25
+      data:
+        first:
+          name: _HsyncFactor
         second: 0
     m_Colors:
       data:

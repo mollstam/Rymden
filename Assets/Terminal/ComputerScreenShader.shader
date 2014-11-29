@@ -11,6 +11,7 @@
 		_StencilReadMask ("Stencil Read Mask", Float) = 255
 
 		_Distortion ("Distortion", Float) = 1
+		_HsyncFactor ("HSync Factor", Float) = 0
 
 		_ColorMask ("Color Mask", Float) = 15
 	}
@@ -70,6 +71,7 @@
 				float4 _MainTex_ST;
 				fixed4 _Color;
 				float _Distortion;
+				float _HsyncFactor;
 
 				float2 radialDistortion(float2 coord)
 		        {
@@ -77,6 +79,36 @@
 		                float dist = dot(cc, cc) * _Distortion;
 		                return (coord + cc * (1.0 + dist) * dist);
 		        }
+
+		        /* Credit due to Cathode.app guy! <3 */
+
+		        float pictureWave(float variable, float repeatCount, float speed)
+				{
+				    float waveLength = repeatCount * variable;
+				    float waveSpeed = speed * _Time;
+				    
+				    return sin(waveLength + waveSpeed);
+				}
+
+		        float pictureHsync(vec2 coords)
+				{
+				    float coordSum = coords.x + coords.y;
+				    float coordProduct = coords.x * coords.y;
+
+				    float variable = coords.y;
+				    float speed = 2000.0 * _HsyncFactor;
+				    
+				    float amplitude = 0.25 + 0.25 * pictureWave(coordSum, 2.0, 500.0);
+				    float repeatCount = 12.0 + 10.0 * pictureWave(coordProduct, 1.0, 200.0);
+				    float carrierWave = amplitude * pictureWave(variable, repeatCount, speed);
+
+				    float tilt = (variable + 0.5) * amplitude;
+
+				    float finalWave = carrierWave + tilt;
+				    float hsync = 0.09;
+
+				    return hsync * finalWave;
+				}
 
 
 
@@ -97,7 +129,12 @@
 				half4 frag (v2f i) : COLOR
 				{
 					half4 col = i.color;
+
 					float2 texcoord = radialDistortion(i.texcoord);
+					
+					if (_HsyncFactor > 0)
+						texcoord.x -= pictureHsync(texcoord);
+
 					col.a *= tex2D(_MainTex, texcoord).a;
 					col = col * _Color;
 					clip (col.a - 0.01);
