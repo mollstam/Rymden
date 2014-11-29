@@ -5,9 +5,7 @@ using System.Collections.Generic;
 public struct TerminalRenderData {
     public int width;
     public int height;
-    public RenderTexture renderTexture; // In
-    public Texture2D texture2D;
-    public Sprite sprite;
+    public RenderTexture renderTexture;
 }
 
 public class TerminalRenderer : MonoBehaviour {
@@ -24,12 +22,10 @@ public class TerminalRenderer : MonoBehaviour {
 
         _renderData.width = 1600;
         _renderData.height = 900;
-        float terminalPixelToWorld = 100;
         _renderData.renderTexture = new RenderTexture(_renderData.width, _renderData.height, 24);
-        _renderData.texture2D = new Texture2D(_renderData.width, _renderData.height);
-        _renderData.sprite = Sprite.Create(_renderData.texture2D, new Rect(0, 0, _renderData.width, _renderData.height), new Vector2(0.5f, 0.5f), terminalPixelToWorld);
+        _renderData.renderTexture.filterMode = FilterMode.Point;
 
-        GetComponent<SpriteRenderer>().sprite = _renderData.sprite;
+        renderer.material.SetTexture("_MainTex", _renderData.renderTexture);
     }
 
     public void Update()
@@ -71,8 +67,8 @@ public class TerminalRenderer : MonoBehaviour {
     {
         if (Event.current.type == EventType.Repaint)
         {
-            _renderData.texture2D.ReadPixels(new Rect(0, 0, _renderData.width, _renderData.height), 0, 0);
-            _renderData.texture2D.Apply();
+            //_renderData.texture2D.ReadPixels(new Rect(0, 0, _renderData.width, _renderData.height), 0, 0);
+            //_renderData.texture2D.Apply();
 
             RenderTexture.active = _prevActiveTexture;
         }

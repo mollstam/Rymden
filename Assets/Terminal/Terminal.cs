@@ -131,6 +131,8 @@ public class Terminal : MonoBehaviour
     private bool _acceptingInput;
     private string _input;
 
+    public string ScreenName;
+
     public string Buffer
     {
         get
@@ -153,6 +155,12 @@ public class Terminal : MonoBehaviour
         AddScreen(startScreen);
         _addNextCharAt = 0.0f;
         HasQuit = false;
+    }
+
+    public void Start()
+    {
+        if (ScreenName != null)
+            Reset(ScreenName);
     }
 
     public void Update()
