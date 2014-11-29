@@ -1,11 +1,19 @@
-﻿using System;
-using UnityEngine;
-using System.Collections;
+﻿using UnityEngine;
 
 public class CameraSway : MonoBehaviour
 {
-    void Update ()
+    private RoomTransitionAnimator _roomTransitionAnimator;
+
+    public void Start()
     {
+        _roomTransitionAnimator = Camera.main.GetComponent<RoomTransitionAnimator>();
+    }
+
+    public void Update()
+    {
+        if (_roomTransitionAnimator.IsAnimating)
+            return;
+
         var currentRoomPos = GetComponent<RoomController>().ActiveTransform.position;
         var currentPosition = new Vector3(currentRoomPos.x, currentRoomPos.y, transform.position.z);
         var speed = 0.5f;

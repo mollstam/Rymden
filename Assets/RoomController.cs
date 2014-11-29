@@ -8,6 +8,8 @@ public class RoomController : MonoBehaviour
     private bool _inTerminal;
 
     private static RoomController instance;
+    private RoomTransitionAnimator _roomTransitionAnimator;
+
     public static RoomController Instance
     {
         get
@@ -37,7 +39,7 @@ public class RoomController : MonoBehaviour
             //InactivateAllRooms();
             _currentRoom = value;
             //_currentRoom.gameObject.SetActive(true);
-            UpdateCameraPosition();
+            //UpdateCameraPosition();
 
             if (_currentRoom != previousRoom && OnRoomChanged != null)
                 OnRoomChanged(_currentRoom.GetComponent<Room>());
@@ -74,7 +76,7 @@ public class RoomController : MonoBehaviour
 
     private void UpdateCameraPosition()
     {
-        if (InTerminal)
+        /*if (InTerminal)
         {
             var computerPos = _terminal.transform.position;
             transform.position = new Vector3(computerPos.x, computerPos.y, transform.position.z);
@@ -82,18 +84,22 @@ public class RoomController : MonoBehaviour
         }
 
         var roomPos = _currentRoom.position;
-        transform.position = new Vector3(roomPos.x, roomPos.y, transform.position.z);
+        transform.position = new Vector3(roomPos.x, roomPos.y, transform.position.z);*/
     }
 
     public void Start()
     {
         _terminal = GameObject.Find("TerminalRoom").GetComponent<Terminal>();
         _inTerminal = false;
+        _roomTransitionAnimator = GetComponent<RoomTransitionAnimator>();
         CurrentRoom = StartingRoom;
     }
 
     public void Update()
     {
+        if (_roomTransitionAnimator.IsAnimating)
+            return;
+
         if (InTerminal && _terminal.HasQuit)
             InTerminal = false;
 
@@ -116,7 +122,19 @@ public class RoomController : MonoBehaviour
         {
             if (doorway.collider2D.bounds.Contains(mousePosition))
             {
-                CurrentRoom = doorway.GetComponent<DoorWay>().Target.transform;
+                var doorwayComp = doorway.GetComponent<DoorWay>();
+                var startBounds = CurrentRoom.FindChild("Background").GetComponent<SpriteRenderer>().bounds;
+                var startRect = new Rect(startBounds.min.x, startBounds.min.y, startBounds.size.x, startBounds.size.y);
+                var targetBounds = doorwayComp.Target.transform.FindChild("Background").GetComponent<SpriteRenderer>().bounds;
+                var targetRect = new Rect(targetBounds.min.x, targetBounds.min.y, targetBounds.size.x, targetBounds.size.y);
+
+                Debug.Log(startRect);
+                Debug.Log(targetRect);
+
+                _roomTransitionAnimator.DoTransition(gameObject, doorway.transform.position, doorwayComp.ExitsTo.transform.position,
+                    doorwayComp.Target.transform.position, startRect, targetRect, 5.2f, 2.0f);
+
+                CurrentRoom = doorwayComp.Target.transform;
                 return;
             }
         }

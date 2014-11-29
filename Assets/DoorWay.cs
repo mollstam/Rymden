@@ -4,6 +4,7 @@ public class DoorWay : MonoBehaviour
 {
     private Tooltip _tooltip;
     public GameObject Target;
+    public GameObject ExitsTo; // Used for animation "out" from the door on the other side.
     public string TooltipText;
 
     public void Start()
