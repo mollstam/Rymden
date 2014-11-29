@@ -6,6 +6,8 @@ public class RoomController : MonoBehaviour
     private Transform _currentRoom;
     private Terminal _terminal;
     private bool _inTerminal;
+    private float _roomCameraSize;
+    private float _terminalCameraSize = 0.83f;
 
     private static RoomController instance;
     private RoomTransitionAnimator _roomTransitionAnimator;
@@ -76,20 +78,20 @@ public class RoomController : MonoBehaviour
 
     private void UpdateCameraPosition()
     {
-        /*if (InTerminal)
+        if (InTerminal)
         {
             var computerPos = _terminal.transform.position;
             transform.position = new Vector3(computerPos.x, computerPos.y, transform.position.z);
+            camera.orthographicSize = _terminalCameraSize;
             return;
         }
 
-        var roomPos = _currentRoom.position;
-        transform.position = new Vector3(roomPos.x, roomPos.y, transform.position.z);*/
+        camera.orthographicSize = _roomCameraSize;
     }
 
     public void Start()
     {
-        _terminal = GameObject.Find("TerminalRoom").GetComponent<Terminal>();
+        _roomCameraSize = camera.orthographicSize;
         _inTerminal = false;
         _roomTransitionAnimator = GetComponent<RoomTransitionAnimator>();
         CurrentRoom = StartingRoom;
@@ -107,7 +109,11 @@ public class RoomController : MonoBehaviour
             HandleLeftMouseClick();
 
         if (_terminal && (Input.GetKeyDown(KeyCode.Escape) || Input.GetMouseButtonUp(1)))
+        {
             InTerminal = false;
+            _terminal.StopUsing();
+            _terminal = null;
+        }
     }
 
     private void HandleLeftMouseClick()
@@ -139,14 +145,15 @@ public class RoomController : MonoBehaviour
             }
         }
 
-        var terminals = GameObject.FindGameObjectsWithTag("TerminalWay");
+        var terminalWays = GameObject.FindGameObjectsWithTag("TerminalWay");
 
-        foreach (var terminal in terminals)
+        foreach (var terminalWay in terminalWays)
         {
-            if (terminal.collider2D.bounds.Contains(mousePosition))
+            if (terminalWay.collider2D.bounds.Contains(mousePosition))
             {
+                _terminal = terminalWay.GetComponent<TerminalWay>().Terminal.GetComponent<Terminal>();
+                _terminal.StartUsing();
                 InTerminal = true;
-                _terminal.GetComponent<Terminal>().Reset(terminal.GetComponent<TerminalWay>().StartScreenName);
                 return;
             }
         }

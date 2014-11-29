@@ -132,6 +132,7 @@ public class Terminal : MonoBehaviour
     private Stack<Screen> _screens = new Stack<Screen>();
     private bool _acceptingInput;
     private string _input;
+    private bool _inUse;
 
     public string ScreenName;
 
@@ -156,7 +157,21 @@ public class Terminal : MonoBehaviour
         _screens = new Stack<Screen>();
         AddScreen(startScreen);
         _addNextCharAt = 0.0f;
+        _inUse = false;
+    }
+
+    public void StartUsing()
+    {
+        _acceptingInput = true;
+        _inUse = true;
         HasQuit = false;
+    }
+
+    public void StopUsing()
+    {
+        HasQuit = true;
+        _inUse = false;
+        _acceptingInput = false;
     }
 
     public void Start()
@@ -170,7 +185,7 @@ public class Terminal : MonoBehaviour
         if (!_screens.Any())
             return;
 
-        if (_currentBuffer == ScreenText())
+        if (_inUse && _currentBuffer == ScreenText())
             _acceptingInput = true;
 
         if (_acceptingInput)
@@ -189,12 +204,15 @@ public class Terminal : MonoBehaviour
                     if (newScreen == null)
                     {
                         _screens.Pop();
-                        _currentBuffer = "";
                         _acceptingInput = false;
 
-                        if (!_screens.Any())
+                        if (_screens.Any())
                         {
-                            HasQuit = true;
+                            _currentBuffer = "";
+                        }
+                        else
+                        {
+                            StopUsing();
                             return;
                         }
                     }

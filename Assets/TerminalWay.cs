@@ -2,5 +2,5 @@
 
 public class TerminalWay : MonoBehaviour
 {
-    public string StartScreenName;
+    public Transform Terminal;
 }
