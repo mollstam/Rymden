@@ -25,6 +25,17 @@ public enum WorldEvent
     End
 };
 
+public enum RoomType
+{
+    LivingQuarters,
+    Bridge,
+    DiningRoom,
+    Medbay,
+    ScienceLab,
+    Greenhouse,
+    Engineering
+};
+
 public class ConditionedAction
 {
     public ConditionedAction(Func<bool> predicate, Action action)
@@ -117,6 +128,24 @@ public static class WorldState
 
         ConditionedActions.Add(new ConditionedAction(
             () => Time.time > runAtTime,
+            action));
+    }
+
+    public static void AddHappenOnEnterRoom(RoomType targetRoom, Action action)
+    {
+        bool hasEntered = false;
+        RoomController.RoomChangedHandler handler;
+        handler = (room) => {
+            if (targetRoom == room.Type)
+            {
+                hasEntered = true;
+                RoomController.Instance.OnRoomChanged -= handler;
+            }
+        };
+        RoomController.Instance.OnRoomChanged += handler;
+
+        ConditionedActions.Add(new ConditionedAction(
+            () => hasEntered,
             action));
     }
 

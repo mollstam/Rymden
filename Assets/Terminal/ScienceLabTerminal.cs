@@ -25,6 +25,9 @@ namespace Assets.Terminal
                                 WorldState.AddHappenSometimeBefore(Time.time + 20, () => {
                                     WorldState.AddNewMessage("URGENT: Other ship destroyed", "Hello there Astronaut! The other ship went boom,\nyou are now alone and it is more important\nthat you reach your goal.\n\nTake care, Earth.");
                                 });
+                                WorldState.AddHappenOnEnterRoom(RoomType.Bridge, () => {
+                                    Debug.Log("We entered bridge?");
+                                });
                                 return null;
                             }),
                             new ScreenAction("Sign off", () => null)

@@ -7,6 +7,17 @@ public class RoomController : MonoBehaviour
     private Terminal _terminal;
     private bool _inTerminal;
 
+    private static RoomController instance;
+    public static RoomController Instance
+    {
+        get
+        {
+            if (instance == null)
+                instance = Camera.main.GetComponent<RoomController>();
+            return instance;
+        }
+    }
+
     public Transform ActiveTransform
     {
         get
@@ -22,10 +33,14 @@ public class RoomController : MonoBehaviour
         get { return _currentRoom; }
         set
         {
+            Transform previousRoom = _currentRoom;
             //InactivateAllRooms();
             _currentRoom = value;
             //_currentRoom.gameObject.SetActive(true);
             UpdateCameraPosition();
+
+            if (_currentRoom != previousRoom && OnRoomChanged != null)
+                OnRoomChanged(_currentRoom.GetComponent<Room>());
         }
     }
 
@@ -44,6 +59,10 @@ public class RoomController : MonoBehaviour
             UpdateCameraPosition();
         }
     }
+
+    public delegate void RoomChangedHandler (Room room);
+
+    public event RoomChangedHandler OnRoomChanged;
 
     private void InactivateAllRooms()
     {
