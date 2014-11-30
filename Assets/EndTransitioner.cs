@@ -16,7 +16,18 @@ public class EndTransitioner : MonoBehaviour
             return;
 
         var currentColor = _overlay.color;
-        currentColor.a += Time.deltaTime * 0.25f;
+
+        var speed = 0.25f;
+
+        if (WorldState.HasHappened(WorldEvent.EngineOverheating))
+        {
+            currentColor.r = 1.0f;
+            currentColor.g = 1.0f;
+            currentColor.b = 1.0f;
+            speed = 0.7f;
+        }
+
+        currentColor.a += Time.deltaTime * speed;
         _overlay.color = currentColor;
 
         if (_overlay.color.a > 1.0f - float.Epsilon)

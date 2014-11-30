@@ -11,7 +11,7 @@ public class CameraSway : MonoBehaviour
 
     public void Update()
     {
-        if (_roomTransitionAnimator.IsAnimating)
+        if (_roomTransitionAnimator.IsAnimating || (WorldState.HasHappened(WorldEvent.PlottedForEarth) || WorldState.HasHappened(WorldEvent.PlottedForEuropa)))
             return;
 
         var scale = 1.0f;
