@@ -32,7 +32,7 @@ public class EndTransitioner : MonoBehaviour
 
         if (_overlay.color.a > 1.0f - float.Epsilon)
         {
-            Application.LoadLevel(2);
+            Application.LoadLevel("TheEnd");
         }
     }
 }
