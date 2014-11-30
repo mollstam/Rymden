@@ -14,7 +14,9 @@ public class EnableWhenBlowingUp : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
-	    if (WorldState.HasHappened(WorldEvent.EngineOverheating))
+        if (WorldState.HasHappened(WorldEvent.EngineOverheating))
+	    {
 	        _renderer.enabled = true;
+	    }
 	}
 }
