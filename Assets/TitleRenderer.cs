@@ -19,7 +19,7 @@ public class TitleRenderer : MonoBehaviour {
         GUILayout.Label("\n\n\n1) Start Game\n\n2) Quit", MenuStyle);
         int prevSize = MenuStyle.fontSize;
         MenuStyle.fontSize = (int)(MenuStyle.fontSize * 0.4f);
-        GUILayout.Label("\n\n\n\n\n\n\n\n\n\nMade during Games Against Ebola game jam\n\nby Karl (@KarlZylinski), Pontus (@pint38), and Tobias (@mollstam).\n\nEat your greens.", MenuStyle);
+        GUILayout.Label("\n\n\n\n\n\n\n\n\n\nMade during Games Against Ebola game jam\n\nby Karl (@KarlZylinski), Pontus (@pint38), and Tobias (@mollstam).\n\nMusic and sound by another Karl (@sumprunk). Eat your greens.", MenuStyle);
         MenuStyle.fontSize = prevSize;
         GUILayout.EndArea();
     }

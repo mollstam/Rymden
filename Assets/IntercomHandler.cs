@@ -14,6 +14,7 @@ public class IntercomHandler : MonoBehaviour {
     public static bool IntroMode = true;
 
     private Queue<QueueItem> _queue = new Queue<QueueItem>();
+    private Queue<QueueItem> _postIntroQueue = new Queue<QueueItem>();
     private string _currentMessage;
     private float _showMessageUntil;
     private string _labelContents; // Partial of message while printing
@@ -40,9 +41,9 @@ public class IntercomHandler : MonoBehaviour {
         }
     }
 
-    public static void Broadcast(string message, Action callback = null)
+    public static void Broadcast(string message, Action callback = null, bool intro = false)
     {
-        Instance.Add(message, callback);
+        Instance.Add(message, callback, intro);
     }
 
     public static void Clear()
@@ -86,18 +87,26 @@ public class IntercomHandler : MonoBehaviour {
         return _labelContents == "";
     }
 
-    public void Add(string message, Action callback)
+    public void Add(string message, Action callback, bool intro)
     {
         QueueItem qi;
         qi.message = message;
         qi.callback = callback;
-        _queue.Enqueue(qi);
+        if ((IntroMode && intro) || (!IntroMode))
+            _queue.Enqueue(qi);
+        else
+            _postIntroQueue.Enqueue(qi);
     }
 
     public void ClearAllMessages()
     {
         _queue.Clear();
         ClearMessage();
+    }
+
+    public void SwapToPostIntroBuffer()
+    {
+        _queue = _postIntroQueue;
     }
 
     private void ClearMessage()
@@ -220,7 +229,7 @@ public class IntercomHandler : MonoBehaviour {
             while (temp.Length > 0)
             {
                 if (s != "")
-                    s += (!IntroMode ? "\n           " : "");
+                    s += (!IntroMode ? "\n" : "");
 
                 String chunk = "";
                 int i = 0;
