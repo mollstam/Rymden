@@ -193,7 +193,7 @@ public class Terminal : MonoBehaviour
         AddScreen(startScreen);
         _addNextCharAt = 0.0f;
         _inUse = false;
-        GetComponent<TerminalRenderer>().ClearTexture();
+        GetComponent<TerminalRenderer>().ClearTextures();
     }
 
     public void StartUsing()
@@ -215,6 +215,11 @@ public class Terminal : MonoBehaviour
     {
         if (ScreenName != null)
             Reset(ScreenName);
+    }
+
+    public bool InUse
+    {
+        get { return _inUse; }
     }
 
     public void Update()
@@ -256,7 +261,7 @@ public class Terminal : MonoBehaviour
                         {
                             _screens.Pop();
                             _currentBuffer = "";
-                            GetComponent<TerminalRenderer>().ClearTexture();
+                            GetComponent<TerminalRenderer>().ClearTextures();
                         }
                         else
                         {
@@ -268,7 +273,7 @@ public class Terminal : MonoBehaviour
                         _screens.Push(newScreen);
 
                     _currentBuffer = "";
-                    GetComponent<TerminalRenderer>().ClearTexture();
+                    GetComponent<TerminalRenderer>().ClearTextures();
                     _acceptingInput = false;
                 }
 
