@@ -23,7 +23,19 @@ namespace Assets.Terminal
                             {
                                 WorldState.SetHappened(WorldEvent.VentGreenHouseOutside);
                                 WorldState.AddHappenSometimeBefore(Time.time + 20, () => {
-                                    WorldState.AddNewMessage("URGENT: Other ship destroyed", "Hello there Astronaut! The other ship went boom,\nyou are now alone and it is more important\nthat you reach your goal.\n\nTake care, Earth.");
+                                    WorldState.AddNewMessage("URGENT: Supply ship destroyed",
+                                    @"We have some very bad news for you. The ship
+before you was hit by the same asteroid storm
+as you and was unfortunately destroyed.
+
+This means that the success of your supply
+mission is even more important. The colony will
+quickly run out of supplies should your load
+not reach them. Stay sharp out there!
+
+Best regards,
+Flamkik Vlabidodo
+ANTESCO Food Supplies Manager");
                                 });
                                 WorldState.AddHappenOnEnterRoom(RoomType.Bridge, () => {
                                     Debug.Log("We entered bridge?");

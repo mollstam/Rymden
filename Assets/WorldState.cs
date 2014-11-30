@@ -89,6 +89,7 @@ any major problems.
 Regards,
 Traval Blansson
 Space-V Shipyard Overseer");
+        Messages.ForEach(x => x.MarkRead());
     }
 
     private static readonly List<Message> Messages = new List<Message>();
