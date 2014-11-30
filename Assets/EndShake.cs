@@ -33,7 +33,16 @@ public class EndShake : MonoBehaviour {
             _shakeAmount += Time.deltaTime * 0.1f;
         }
 
-        var currentRoom = GetComponent<RoomController>().ActiveTransform;
+        var controller = GetComponent<RoomController>();
+        
+        if (controller == null)
+            return;
+
+        var currentRoom = controller.ActiveTransform;
+
+        if (currentRoom == null)
+            return;
+
         var currentRoomPos = currentRoom.position;
         var currentPosition = new Vector3(currentRoomPos.x, currentRoomPos.y, transform.position.z);
         transform.position = currentPosition + new Vector3(Mathf.Cos(Time.time * _shakeHardness) * _shakeAmount, Mathf.Sin(Time.time * _shakeHardness) * _shakeAmount * 2.0f, 0) * 0.1f;
