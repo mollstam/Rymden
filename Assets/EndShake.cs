@@ -44,8 +44,6 @@ public class EndShake : MonoBehaviour {
         transform.position = ClampCameraInside(rectCurernt);
     }
 
-
-
     private Vector3 ClampCameraInside(Rect container)
     {
         var verticalSize = camera.orthographicSize * 2.0f;
