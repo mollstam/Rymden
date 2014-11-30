@@ -170,6 +170,8 @@ public class Terminal : MonoBehaviour
 
     public string ScreenName;
     public float CameraSize = 1.0f;
+    public AudioClip Blipp;
+    public AudioClip Hsync;
 
     public string Buffer
     {
@@ -287,7 +289,11 @@ public class Terminal : MonoBehaviour
         int enteredNumber;
 
         if (int.TryParse(Input.inputString, out enteredNumber))
+        {
             _input += enteredNumber.ToString(CultureInfo.InvariantCulture);
+            if (_inUse)
+                audio.PlayOneShot(Blipp, 0.1f);
+        }
     }
 
     private void AppendText()
@@ -306,6 +312,11 @@ public class Terminal : MonoBehaviour
             _currentBuffer = _currentBuffer + completeBuffer.Substring(_currentBuffer.Length, 1);
         else if (bufferSizeDiff < 0)
             _currentBuffer = _currentBuffer.Substring(0, _currentBuffer.Count() - 1);
+
+        if (bufferSizeDiff != 0 && _inUse)
+        {
+            audio.PlayOneShot(Blipp, 0.1f);
+        }
 
         _addNextCharAt = Time.time + CharacterInterval;
     }

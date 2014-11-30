@@ -8,6 +8,12 @@ public class TerminalShaderController : MonoBehaviour {
 
     private float _hsyncStartAt = 0;
     private float _hsyncCurrentValue;
+    private AudioClip _sound;
+
+    public void Start()
+    {
+        _sound = GetComponent<Terminal>().Hsync;
+    }
 
     public void Update()
     {
@@ -37,6 +43,8 @@ public class TerminalShaderController : MonoBehaviour {
     public void TriggerHsync()
     {
         _hsyncStartAt = Time.time;
+        if (GetComponent<Terminal>().InUse)
+            audio.PlayOneShot(_sound, 0.065f);
     }
 
 }
