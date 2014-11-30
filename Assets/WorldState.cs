@@ -33,7 +33,8 @@ public enum RoomType
     Medbay,
     ScienceLab,
     Greenhouse,
-    Engineering
+    Engineering,
+    Intro
 };
 
 public class ConditionedAction

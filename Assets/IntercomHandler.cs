@@ -3,17 +3,26 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System;
 
+public struct QueueItem
+{
+    public string message;
+    public Action callback;
+}
+
 public class IntercomHandler : MonoBehaviour {
 
-    private Queue<string> _queue = new Queue<string>();
+    public static bool IntroMode = true;
+
+    private Queue<QueueItem> _queue = new Queue<QueueItem>();
     private string _currentMessage;
     private float _showMessageUntil;
     private string _labelContents; // Partial of message while printing
     private float _printingThrottle = 0.2f; // Pause between each segment
     private float _printNextSegmentAt;
-    private float _minShowTime = 3.0f; // min no secs to show message
+    private float _minShowTime = 5.0f; // min no secs to show message
     private float _showTimePerCharacter = 0.3f; // seconds to add to show time for each character in message
     private int _maxWidth; // Calc on update
+    private Action _currentCallback;
 
     public GUIStyle LabelStyle;
     public AudioClip Voice1;
@@ -22,7 +31,7 @@ public class IntercomHandler : MonoBehaviour {
     public AudioClip Voice4;
 
     private static IntercomHandler instance;
-    private static IntercomHandler Instance
+    public static IntercomHandler Instance
     {
         get {
             if (instance == null)
@@ -31,9 +40,9 @@ public class IntercomHandler : MonoBehaviour {
         }
     }
 
-    public static void Broadcast(string message)
+    public static void Broadcast(string message, Action callback = null)
     {
-        Instance.Add(message);
+        Instance.Add(message, callback);
     }
 
     public void Update()
@@ -43,9 +52,22 @@ public class IntercomHandler : MonoBehaviour {
         if ((_currentMessage != "" && Time.time > _showMessageUntil) || (_currentMessage == "" && _queue.Count > 0))
         {
             ClearMessage();
+            if (_currentCallback != null)
+            {
+                _currentCallback();
+                _currentCallback = null;
+            }
             
-            string nextMessage = _queue.Count > 0 ? _queue.Dequeue() : "";
-            ShowMessage(nextMessage);
+            if (_queue.Count > 0)
+            {
+                QueueItem next = _queue.Dequeue();
+                _currentCallback = next.callback;
+                ShowMessage(next.message);
+            }
+            else
+            {
+                ShowMessage("");
+            }
         }
 
         if (_labelContents != _currentMessage && Time.time > _printNextSegmentAt)
@@ -54,9 +76,17 @@ public class IntercomHandler : MonoBehaviour {
         }
     }
 
-    public void Add(string message)
+    public bool IsEmpty()
     {
-        _queue.Enqueue(message);
+        return _labelContents == "";
+    }
+
+    public void Add(string message, Action callback)
+    {
+        QueueItem qi;
+        qi.message = message;
+        qi.callback = callback;
+        _queue.Enqueue(qi);
     }
 
     private void ClearMessage()
@@ -175,11 +205,11 @@ public class IntercomHandler : MonoBehaviour {
         String s = "";
         if (_labelContents.Length > 0)
         {
-            String temp = "[Intercom] " + _labelContents;
+            String temp = (!IntroMode ? "[Intercom] " : "") + _labelContents;
             while (temp.Length > 0)
             {
                 if (s != "")
-                    s += "\n           ";
+                    s += (!IntroMode ? "\n           " : "");
 
                 String chunk = "";
                 int i = 0;
@@ -197,6 +227,7 @@ public class IntercomHandler : MonoBehaviour {
         }
 
         GUI.skin = RymdenGUI.Skin;
+
         GUI.Label(new Rect(60, 40, UnityEngine.Screen.width - 120, 100), s, LabelStyle);
     }
 
