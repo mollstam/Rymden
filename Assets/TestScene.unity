@@ -815,7 +815,7 @@ MonoBehaviour:
       m_Right: 0
       m_Top: 0
       m_Bottom: 0
-    m_Font: {fileID: 0}
+    m_Font: {fileID: 12800000, guid: ace2a6313dd7d174bb370ba53c579136, type: 2}
     m_FontSize: 33
     m_FontStyle: 0
     m_Alignment: 0
@@ -1717,7 +1717,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd24289f2e78584cb7609004d494668, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartingRoom: {fileID: 1038762824}
+  StartingRoom: {fileID: 1964796008}
 --- !u!114 &672252836
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2222,9 +2222,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 811545425}
-  m_LocalRotation: {x: -.0519528911, y: -.903891921, z: .407425314, w: -.119519599}
-  m_LocalPosition: {x: 4.51999998, y: -2.7650001, z: -5}
-  m_LocalScale: {x: .0894565135, y: .0521118417, z: .0500000007}
+  m_LocalRotation: {x: -.0438070558, y: -.922534287, z: .361686498, w: -.127256855}
+  m_LocalPosition: {x: 4.52199984, y: -2.773, z: -5.00699997}
+  m_LocalScale: {x: .0909119844, y: .0565572456, z: .0627169386}
   m_Children: []
   m_Father: {fileID: 1715153465}
   m_RootOrder: 0
@@ -2312,7 +2312,7 @@ MonoBehaviour:
       m_Right: 0
       m_Top: 0
       m_Bottom: 0
-    m_Font: {fileID: 0}
+    m_Font: {fileID: 12800000, guid: ace2a6313dd7d174bb370ba53c579136, type: 2}
     m_FontSize: 33
     m_FontStyle: 0
     m_Alignment: 0
@@ -2529,6 +2529,15 @@ Prefab:
     - target: {fileID: 400000, guid: 46ab84133f3024648bd9efcfabbba061, type: 2}
       propertyPath: m_RootOrder
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 46ab84133f3024648bd9efcfabbba061, type: 2}
+      propertyPath: TerminalStyle.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: ace2a6313dd7d174bb370ba53c579136,
+        type: 2}
+    - target: {fileID: 11400002, guid: 46ab84133f3024648bd9efcfabbba061, type: 2}
+      propertyPath: TerminalStyle.m_FontSize
+      value: 33
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 46ab84133f3024648bd9efcfabbba061, type: 2}
@@ -2961,7 +2970,7 @@ MonoBehaviour:
       m_Right: 0
       m_Top: 0
       m_Bottom: 0
-    m_Font: {fileID: 0}
+    m_Font: {fileID: 12800000, guid: ace2a6313dd7d174bb370ba53c579136, type: 2}
     m_FontSize: 33
     m_FontStyle: 0
     m_Alignment: 0
@@ -3267,6 +3276,11 @@ Prefab:
       propertyPath: ScreenName
       value: EngineeringScreen
       objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 46ab84133f3024648bd9efcfabbba061, type: 2}
+      propertyPath: TerminalStyle.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: ace2a6313dd7d174bb370ba53c579136,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 46ab84133f3024648bd9efcfabbba061, type: 2}
   m_RootGameObject: {fileID: 1672291547}
@@ -3891,7 +3905,7 @@ MonoBehaviour:
       m_Right: 0
       m_Top: 0
       m_Bottom: 0
-    m_Font: {fileID: 0}
+    m_Font: {fileID: 12800000, guid: ace2a6313dd7d174bb370ba53c579136, type: 2}
     m_FontSize: 33
     m_FontStyle: 0
     m_Alignment: 0
@@ -4054,7 +4068,7 @@ MonoBehaviour:
       m_Right: 0
       m_Top: 0
       m_Bottom: 0
-    m_Font: {fileID: 0}
+    m_Font: {fileID: 12800000, guid: ace2a6313dd7d174bb370ba53c579136, type: 2}
     m_FontSize: 33
     m_FontStyle: 0
     m_Alignment: 0

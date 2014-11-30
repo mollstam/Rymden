@@ -79,7 +79,7 @@ namespace Assets.Terminal
 
                 return new ScreenInfo(
                     "Engineering\n" +
-                    "-----------\n\n",
+                    "-----------",
 
                     new List<ScreenAction>
                         {

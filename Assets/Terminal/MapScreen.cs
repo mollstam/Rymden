@@ -23,7 +23,7 @@ namespace Assets.Terminal
        /   1   \ v Ladder down  / |     \   
       /_________\              /     8   \ 
       |    |    |              |  |_ ____| 
-      |    |  v |  x: You are  |    |  ^ | 
+      |    | v  |  x: You are  |    | ^  | 
       | 2     3 |      here    | 5  |  6 | 
       |_  _|____|              |_  _|_  _| 
       |       4 |              |    7    | 

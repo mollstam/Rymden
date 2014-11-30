@@ -79,7 +79,7 @@ ANTESCO Food Supplies Manager");
 
                 return new ScreenInfo(
                     "Science Lab Computer\n" +
-                    "--------------------\n\n",
+                    "--------------------",
                     
                     new List<ScreenAction>
                     {

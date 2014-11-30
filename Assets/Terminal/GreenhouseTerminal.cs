@@ -56,7 +56,10 @@ the instant temperature fall.", new List<ScreenAction> {
                 }
 
                 return new ScreenInfo(
-                    @"Please note that the recent atmosphere venting
+                    @"Greenhouse Computer
+-------------------
+
+Please note that the recent atmosphere venting
 has killed all the plants in this room. This
 comes with the consequence that the oxygen will
 be insufficient for the one (1) living being

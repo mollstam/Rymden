@@ -6,9 +6,10 @@ namespace Assets.Terminal
     static class CommandBridgeTerminalConstants
     {
         public static string HeatWarning =
-            "!!! CAUTION, HIGH HEAT IN ENGINEERING !!!\n" +
-            "!!! ENGINES NEED DIAGNOSTICS !!!\n" +
-            "!!! MAKING A BURN MIGHT CAUSE PERMANENT DAMAGE !!!\n";
+@"Caution, high heat detected in Engineering.
+Engines require diagnostics to function
+properly, making a burn without doing so may
+cause permanent damage or death.";
     }
 
     class CommandBridgeTerminalPlotCourse : ScreenBehahvior

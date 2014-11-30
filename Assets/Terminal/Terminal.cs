@@ -107,7 +107,7 @@ public class Screen
         {
             return new List<ScreenAction>
             {
-                new ScreenAction("Dismiss warning", () =>
+                new ScreenAction("Dismiss", () =>
                 {
                     WorldState.SetHappened(WorldEvent.StartInfoRead);
                     return _behavior;
@@ -131,12 +131,17 @@ public class Screen
         if (WorldState.HasHappened(WorldEvent.StartInfoAvailable) &&
            !WorldState.HasHappened(WorldEvent.StartInfoRead))
         {
-            return "!!! EMERGENCY !!!\n\n" +
-                   "- ASTEROID STORM DETECTED\n" +
-                   "- COURSE HAS BEEN DIVERTED \n" +
-                   "- ASTEROID HIT DETECTED\n" +
-                   "- FIRE BETWEEN ENGINEERING AND GREENHOUSE\n" +
-                   "- ENGINES OFFLINE, SHIP TUMBLING FREE\n";
+            return @"Important Announcement
+----------------------
+
+An asteroid storm was detected and the course
+has therefore been diverted. An impact with
+upper deck was detected, there is currently
+a fire between Engineering and the Greenhouse.
+
+The engines are currently offline due to the
+heat development in Engineering. The ship is
+tumbling free.";
         }
 
         return _behavior.CurrentInfo.Text;

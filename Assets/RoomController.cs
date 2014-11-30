@@ -146,9 +146,6 @@ public class RoomController : MonoBehaviour
                 var targetBounds = doorwayComp.Target.transform.FindChild("Background").GetComponent<SpriteRenderer>().bounds;
                 var targetRect = new Rect(targetBounds.min.x, targetBounds.min.y, targetBounds.size.x, targetBounds.size.y);
 
-                Debug.Log(startRect);
-                Debug.Log(targetRect);
-
                 _roomTransitionAnimator.DoTransition(gameObject, doorway.transform.position, doorwayComp.ExitsTo.transform.position,
                     doorwayComp.Target.transform.position, startRect, targetRect, 5.2f, 2.0f);
 

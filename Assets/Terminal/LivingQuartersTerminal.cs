@@ -7,7 +7,8 @@ class LivingQuartersTerminal : ScreenBehahvior
     {
         get
         {
-            return new ScreenInfo("Bye",
+            return new ScreenInfo("Living Quarters\n" +
+                                  "---------------",
     
             new List<ScreenAction>
             {
