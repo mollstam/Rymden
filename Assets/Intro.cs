@@ -22,13 +22,13 @@ public class Intro : MonoBehaviour {
             if (_step < 2 && Time.time > _startTime + 8.0)
             {
                 _step = 2;
-                IntercomHandler.Broadcast("After many years of uncertainty the scientific operation at base EUROPA II on Europa has finally started to stabilise.");
-                IntercomHandler.Broadcast("Being far, far away from home not even replication technology can cut the proverbial umbilical chord to planet Earth.");
-                IntercomHandler.Broadcast("Concurrently running shipments of supplies to the new base are critical.");
-                IntercomHandler.Broadcast("The trip is far. The transeuropan trajectory takes more than 9 years, and not everyone are cut out to be alone for that long.");
+                IntercomHandler.Broadcast("After many years of uncertainty the scientific operation at base EUROPA II on Europa has finally started to stabilise.", null, true);
+                IntercomHandler.Broadcast("Being far, far away from home not even replication technology can cut the proverbial umbilical chord to planet Earth.", null, true);
+                IntercomHandler.Broadcast("Concurrently running shipments of supplies to the new base are critical.", null, true);
+                IntercomHandler.Broadcast("The trip is far. The transeuropan trajectory takes more than 9 years, and not everyone are cut out to be alone for that long.", null, true);
                 IntercomHandler.Broadcast("Is anyone?", () => {
                     _endTime = Time.time + 4;
-                });
+                }, true);
             }
             else if (_endTime != 0 && Time.time > _endTime)
             {
@@ -41,6 +41,7 @@ public class Intro : MonoBehaviour {
     {
         IntercomHandler.IntroMode = false;
         IntercomHandler.Clear();
+        WorldState.AddHappenAt(Time.time + 4, () => IntercomHandler.Instance.SwapToPostIntroBuffer());
         RoomController.Instance.CurrentRoom = GameObject.Find("LivingQuarters").transform;
         _endTime = 0;
         _running = false;

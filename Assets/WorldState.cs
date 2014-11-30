@@ -117,11 +117,17 @@ Space-V Shipyard Overseer");
     {
         Messages.Add(new Message(subject, time, text));
         Messages.Sort((m1, m2) => m1.Time.CompareTo(m2.Time));
+        IntercomHandler.Broadcast("New message received. Please go to a nearby terminal equipped with the Message Payload Retrieval and Decryption Interface (MPRDI). Thank you.");
     }
 
     public static List<Message> AllMessages()
     {
         return Messages;
+    }
+
+    public static void DoSomethingLater(float time, Action something)
+    {
+
     }
 
     public static bool HasHappened(WorldEvent evt)
@@ -144,6 +150,13 @@ Space-V Shipyard Overseer");
         ConditionedActions.Add(new ConditionedAction(
             () => Time.time > time,
             () => SetHappened(evt)));
+    }
+
+    public static void AddHappenAt(float time, Action action)
+    {
+        ConditionedActions.Add(new ConditionedAction(
+            () => Time.time > time,
+            action));
     }
 
     public static void AddHappenSometimeBefore(float time, Action action)
