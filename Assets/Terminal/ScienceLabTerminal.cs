@@ -10,7 +10,7 @@ namespace Assets.Terminal
             get
             {
                 return new ScreenInfo(
-                    @"Venting greenhouse atmosphere
+                    @"Venting Greenhouse atmosphere
 -----------------------------
 
 Are you sure? Venting the atmosphere will make
@@ -65,13 +65,18 @@ ANTESCO Food Supplies Manager");
                 if (!(WorldState.HasHappened(WorldEvent.VentGreenHouseInside) || WorldState.HasHappened(WorldEvent.VentGreenHouseOutside)))
                 {
                     return new ScreenInfo(
-                        "Science Lab Computer\n" +
-                        "--------------------\n\n" +
-                        "Warning, flames detected in greenhouse.\n",
+                        @"Science Lab Computer
+--------------------
+
+Warning, flames detected in Greenhouse.
+Recommended course of action is to vent the
+atmosphere from that room, removing the oxygen
+feeding the fire. This will also kill any
+living entities inside.",
 
                         new List<ScreenAction>
                         {
-                            new ScreenAction("Vent greenhouse atmosphere", () => new VentGreenhouseScreen()),
+                            new ScreenAction("Vent Greenhouse atmosphere", () => new VentGreenhouseScreen()),
                             new ScreenAction("Sign off", () => null)
                         });
                 }

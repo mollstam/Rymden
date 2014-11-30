@@ -206,6 +206,7 @@ public class Terminal : MonoBehaviour
     public void StopUsing()
     {
         HasQuit = true;
+        _input = "";
         _inUse = false;
         _acceptingInput = false;
     }
@@ -220,7 +221,17 @@ public class Terminal : MonoBehaviour
     {
         if (!_screens.Any())
             return;
-        
+
+        var screenText = ScreenText();
+
+        if (!screenText.StartsWith(_currentBuffer.Substring(0,
+                screenText.Length < _currentBuffer.Length ? screenText.Length : _currentBuffer.Length)))
+        {
+            _currentBuffer = "";
+            _input = "";
+            _acceptingInput = false;
+        }
+
         if (_inUse && _currentBuffer == ScreenText())
             _acceptingInput = true;
 
@@ -239,11 +250,11 @@ public class Terminal : MonoBehaviour
 
                     if (newScreen == null)
                     {
-                        _screens.Pop();
                         _acceptingInput = false;
 
-                        if (_screens.Any())
+                        if (_screens.Count() > 1)
                         {
+                            _screens.Pop();
                             _currentBuffer = "";
                             GetComponent<TerminalRenderer>().ClearTexture();
                         }
@@ -284,13 +295,15 @@ public class Terminal : MonoBehaviour
         if (Time.time <= _addNextCharAt)
             return;
 
-        if (CompleteBuffer() == _currentBuffer)
+        var completeBuffer = CompleteBuffer();
+
+        if (completeBuffer == _currentBuffer)
             return;
 
-        var bufferSizeDiff = CompleteBuffer().Count() - _currentBuffer.Count();
+        var bufferSizeDiff = completeBuffer.Count() - _currentBuffer.Count();
 
         if (bufferSizeDiff > 0)
-            _currentBuffer = _currentBuffer + CompleteBuffer().Substring(_currentBuffer.Length, 1);
+            _currentBuffer = _currentBuffer + completeBuffer.Substring(_currentBuffer.Length, 1);
         else if (bufferSizeDiff < 0)
             _currentBuffer = _currentBuffer.Substring(0, _currentBuffer.Count() - 1);
 

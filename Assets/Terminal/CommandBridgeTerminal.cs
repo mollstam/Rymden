@@ -54,14 +54,14 @@ cause permanent damage or death.";
                         {
                             new ScreenAction("To Earth", () =>
                             {
-                                WorldState.SetFutureEvent(60, WorldEvent.PlottedForEarth);
-                                WorldState.SetFutureEvent(60, WorldEvent.End);
+                                WorldState.SetFutureEvent(Time.time + 60, WorldEvent.PlottedForEarth);
+                                WorldState.SetFutureEvent(Time.time + 60, WorldEvent.End);
                                 return null;
                             }),
                             new ScreenAction("To Europa", () =>
                             {
-                                WorldState.SetFutureEvent(60, WorldEvent.PlottedForEuropa);
-                                WorldState.SetFutureEvent(60, WorldEvent.End);
+                                WorldState.SetFutureEvent(Time.time + 60, WorldEvent.PlottedForEuropa);
+                                WorldState.SetFutureEvent(Time.time + 60, WorldEvent.End);
                                 return null;
                             }),
                             new ScreenAction("Exit", () => null)
@@ -89,15 +89,18 @@ cause permanent damage or death.";
                 if (WorldState.HasHappened(WorldEvent.EngineOverheating))
                 {
                     var destination = WorldState.HasHappened(WorldEvent.PlottedForEarth)
-                        ? "EARTH"
-                        : "EUROPA";
+                        ? "Earth"
+                        : "Europa";
 
                     return new ScreenInfo(
-                        "Ship Navigational Computer\n" +
-                        "--------------------------\n\n" +
-                        "!!! MAKING NAVIGATIONAL BURN TORWARDS " + destination + " !!!\n" +
-                        "!!! ENGINES OVERHEATING !!!\n" +
-                        "",
+                        @"Ship Navigational Computer
+--------------------------
+
+Currently making navigation burn towards
+"+ destination + @".
+
+The engines are overheating, main cooling is
+failing. Core integrity at high risk.",
 
                         new List<ScreenAction>
                         {
