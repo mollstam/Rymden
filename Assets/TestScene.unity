@@ -867,6 +867,8 @@ MonoBehaviour:
   CharacterInterval: .00999999978
   ScreenName: ScienceLabTerminal
   CameraSize: .300000012
+  Blipp: {fileID: 0}
+  Hsync: {fileID: 0}
 --- !u!1 &243824944
 GameObject:
   m_ObjectHideFlags: 0
@@ -2656,6 +2658,8 @@ MonoBehaviour:
   CharacterInterval: .00999999978
   ScreenName: CommandBridgeTerminal
   CameraSize: .600000024
+  Blipp: {fileID: 0}
+  Hsync: {fileID: 0}
 --- !u!1 &812969829
 GameObject:
   m_ObjectHideFlags: 0
@@ -2939,6 +2943,14 @@ Prefab:
       propertyPath: TerminalStyle.m_FontSize
       value: 33
       objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 46ab84133f3024648bd9efcfabbba061, type: 2}
+      propertyPath: Blipp
+      value: 
+      objectReference: {fileID: 8300000, guid: ed69b36dbd8394db9aa90db7343df1fd, type: 3}
+    - target: {fileID: 11400004, guid: 46ab84133f3024648bd9efcfabbba061, type: 2}
+      propertyPath: Hsync
+      value: 
+      objectReference: {fileID: 8300000, guid: 14cf1c81556014d8cba063c8e3273b78, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 46ab84133f3024648bd9efcfabbba061, type: 2}
   m_RootGameObject: {fileID: 1652041679}
@@ -3477,6 +3489,8 @@ MonoBehaviour:
   CharacterInterval: .00999999978
   ScreenName: GreenhouseTerminal
   CameraSize: .800000012
+  Blipp: {fileID: 0}
+  Hsync: {fileID: 0}
 --- !u!1 &1246043805
 GameObject:
   m_ObjectHideFlags: 0
@@ -4395,6 +4409,7 @@ GameObject:
   - 33: {fileID: 1652041682}
   - 23: {fileID: 1652041681}
   - 114: {fileID: 1652041685}
+  - 82: {fileID: 1652041686}
   m_Layer: 0
   m_Name: Terminal
   m_TagString: Untagged
@@ -4529,6 +4544,8 @@ MonoBehaviour:
   CharacterInterval: .00999999978
   ScreenName: LivingQuartersTerminal
   CameraSize: .649999976
+  Blipp: {fileID: 8300000, guid: ed69b36dbd8394db9aa90db7343df1fd, type: 3}
+  Hsync: {fileID: 8300000, guid: 14cf1c81556014d8cba063c8e3273b78, type: 3}
 --- !u!114 &1652041685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4543,6 +4560,64 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HSyncAmount: .00999999978
   HSyncTime: 4
+--- !u!82 &1652041686
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1652041679}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!1 &1672291547
 GameObject:
   m_ObjectHideFlags: 0
@@ -4692,6 +4767,8 @@ MonoBehaviour:
   CharacterInterval: .00999999978
   ScreenName: EngineeringScreen
   CameraSize: .649999976
+  Blipp: {fileID: 0}
+  Hsync: {fileID: 0}
 --- !u!4 &1672291553
 Transform:
   m_ObjectHideFlags: 0
