@@ -13,7 +13,7 @@ public class GreenhouseFire : MonoBehaviour {
         set
         {
             _isBurning = value;
-            active = _isBurning;
+            active =_isBurning;
             EngineeringDoor.active = !_isBurning;
         }
     }
@@ -21,6 +21,18 @@ public class GreenhouseFire : MonoBehaviour {
     public void Start()
     {
         IsBurning = true;
+
+        RoomController.Instance.OnRoomChanged += room =>
+        {
+            if (room.Type == RoomType.Greenhouse)
+            {
+                audio.Play();
+            }
+            else
+            {
+                audio.Stop();
+            }
+        };
     }
 
     public void Update()
