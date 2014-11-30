@@ -297,8 +297,14 @@ public class Terminal : MonoBehaviour
         {
             _input += enteredNumber.ToString(CultureInfo.InvariantCulture);
             if (_inUse)
-                audio.PlayOneShot(Blipp, 0.1f);
+                PlayBlipp();
         }
+    }
+
+    private void PlayBlipp()
+    {
+        audio.pitch = (UnityEngine.Random.value + 0.4f) * 3.0f;
+        audio.PlayOneShot(Blipp, 0.5f);
     }
 
     private void AppendText()
@@ -313,15 +319,19 @@ public class Terminal : MonoBehaviour
 
         var bufferSizeDiff = completeBuffer.Count() - _currentBuffer.Count();
 
+        string addedChar = null;
         if (bufferSizeDiff > 0)
-            _currentBuffer = _currentBuffer + completeBuffer.Substring(_currentBuffer.Length, 1);
-        else if (bufferSizeDiff < 0)
-            _currentBuffer = _currentBuffer.Substring(0, _currentBuffer.Count() - 1);
-
-        if (bufferSizeDiff != 0 && _inUse)
         {
-            audio.PlayOneShot(Blipp, 0.1f);
+            addedChar = completeBuffer.Substring(_currentBuffer.Length, 1);
+            _currentBuffer = _currentBuffer + addedChar;
         }
+        else if (bufferSizeDiff < 0)
+        {
+            _currentBuffer = _currentBuffer.Substring(0, _currentBuffer.Count() - 1);
+        }
+
+        if (bufferSizeDiff != 0 && _inUse && _currentBuffer.Length % 5 == 0 && addedChar != null && addedChar != " ")
+            PlayBlipp();
 
         _addNextCharAt = Time.time + CharacterInterval;
     }
