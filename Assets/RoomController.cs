@@ -39,6 +39,19 @@ public class RoomController : MonoBehaviour
             Transform previousRoom = _currentRoom;
             //InactivateAllRooms();
             _currentRoom = value;
+
+            if (_currentRoom != null)
+            {
+                var terminal = _currentRoom.FindChild("Terminal");
+
+                if (terminal != null)
+                {
+                    var terminalComponent = terminal.GetComponent<Terminal>();
+
+                    if (terminalComponent != null)
+                        terminalComponent.Reset(terminalComponent.ScreenName);
+                }
+            }
             //_currentRoom.gameObject.SetActive(true);
             //UpdateCameraPosition();
 

@@ -56,6 +56,7 @@ namespace Assets.Terminal
                     new ScreenAction(GetMessageSubjectDisplayName(message), () =>
                         new MessageScreen(message))).ToList();
 
+                allMessageActions.Add(new ScreenAction("Refresh", () => this));
                 allMessageActions.Add(new ScreenAction("Back", () => null));
 
                 return new ScreenInfo(

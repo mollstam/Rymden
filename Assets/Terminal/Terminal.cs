@@ -126,7 +126,7 @@ public class Screen
         return options;
     }
 
-    private string AllText()
+    public string AllText()
     {
         if (WorldState.HasHappened(WorldEvent.StartInfoAvailable) &&
            !WorldState.HasHappened(WorldEvent.StartInfoRead))
@@ -215,7 +215,7 @@ public class Terminal : MonoBehaviour
     {
         if (!_screens.Any())
             return;
-
+        
         if (_inUse && _currentBuffer == ScreenText())
             _acceptingInput = true;
 

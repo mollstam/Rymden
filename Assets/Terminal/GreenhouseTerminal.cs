@@ -3,6 +3,38 @@ using UnityEngine;
 
 namespace Assets.Terminal
 {
+    class VentGreenhouseInsideScreen : ScreenBehahvior
+    {
+        public ScreenInfo CurrentInfo
+        {
+            get
+            {
+                return new ScreenInfo(
+                    @"Venting atmosphere in this room
+-----------------------------
+
+Are you sure? Venting the atmosphere will make
+most living matter in this room perish due to
+the instant temperature fall.", new List<ScreenAction> {
+                    new ScreenAction("Yes", () =>
+                    {
+                        WorldState.SetHappened(WorldEvent.VentGreenHouseInside);
+                        return null;
+                    }),
+                    new ScreenAction("No", () => null)});
+            }
+        }
+
+        public bool ShowMessages
+        {
+            get { return false; }
+        }
+
+        public bool ShowMap
+        {
+            get { return false; }
+        }
+    }
     class GreenhouseTerminal : ScreenBehahvior
     {
         public ScreenInfo CurrentInfo
@@ -13,30 +45,27 @@ namespace Assets.Terminal
                 {
                     return new ScreenInfo(
                         "Greenhouse Computer\n" +
-                        "--------------------------\n\n" +
-                        "It is burning\n" +
-                        "",
+                        "-------------------\n\n" +
+                        "Warning, flames detected in this room.\n",
 
                         new List<ScreenAction>
                         {
-                            new ScreenAction("Flush oxygen", () =>
-                            {
-                                WorldState.SetHappened(WorldEvent.VentGreenHouseInside);
-                                return null;
-                            }),
+                            new ScreenAction("Vent atmosphere in this room", () => new VentGreenhouseInsideScreen()),
                             new ScreenAction("Sign off", () => null)
                         });
                 }
 
-
                 return new ScreenInfo(
-                    "Greenhouse Computer\n" +
-                    "--------------------------\n\n",
-                    
+                    @"Please note that the recent atmosphere venting
+has killed all the plants in this room. This
+comes with the consequence that the oxygen will
+be insufficient for the one (1) living being
+on-board for the most recently plotted course.",
+
                     new List<ScreenAction>
-                    {
-                        new ScreenAction("Sign off", () => null)
-                    });
+                {
+                    new ScreenAction("Sign off", () => null)
+                });
             }
         }
 
