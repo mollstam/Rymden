@@ -1,9 +1,13 @@
-﻿﻿using UnityEngine;
+﻿﻿using System;
+﻿using UnityEngine;
 
 public class Music : MonoBehaviour
 {
     public AudioClip ChillMusic;
     public AudioClip DramaMusic;
+    private AudioSource _chillSource;
+    private float _chillVolume;
+    private AudioSource _dramaSource;
 
     // Use this for initialization
     void Start()
@@ -14,24 +18,40 @@ public class Music : MonoBehaviour
         {
             if (m != gameObject)
             {
-                m.audio.clip = ChillMusic;
-                m.audio.loop = true;
-                audio.Play();
                 Destroy(gameObject);
                 return;
             }
-                
         }
 
-        audio.clip = ChillMusic;
-        audio.loop = true;
-        audio.Play();
+        _chillSource = gameObject.AddComponent<AudioSource>();
+        _chillSource.loop = true;
+        _chillSource.clip = ChillMusic;
+        _chillVolume = 1.0f;
+        _chillSource.Play();
+        
+        _dramaSource = gameObject.AddComponent<AudioSource>();
+        _dramaSource.loop = false;
+        _dramaSource.clip = DramaMusic;
+        _dramaSource.Stop();
+
         DontDestroyOnLoad(gameObject);
+    }
+
+    public void SetDrama()
+    {
+        _dramaSource.Stop();
+        _dramaSource.Play();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (_dramaSource.isPlaying)
+        {
+            _chillVolume -= Time.time;
+            _chillVolume = Math.Max(_chillVolume, 0);
+        }
 
+        _chillSource.volume = _chillVolume;
     }
 }

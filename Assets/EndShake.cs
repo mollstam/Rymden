@@ -18,6 +18,9 @@ public class EndShake : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        if (WorldState.HasEndState())
+            return;
+
         if (!_shaking && (WorldState.HasHappened(WorldEvent.PlottedForEarth) || WorldState.HasHappened(WorldEvent.PlottedForEuropa)))
         {
             _startedAt = Time.time;
@@ -38,10 +41,15 @@ public class EndShake : MonoBehaviour {
         var currentPosition = new Vector3(currentRoomPos.x, currentRoomPos.y, transform.position.z);
         transform.position = currentPosition + new Vector3(Mathf.Cos(Time.time * _shakeHardness) * _shakeAmount, Mathf.Sin(Time.time * _shakeHardness) * _shakeAmount * 2.0f, 0) * 0.1f;
 
-        var boundsCurrent = currentRoom.FindChild("Background").GetComponent<SpriteRenderer>().bounds;
-        var rectCurernt = new Rect(boundsCurrent.min.x, boundsCurrent.min.y, boundsCurrent.size.x, boundsCurrent.size.y);
+        var bg = currentRoom.FindChild("Background");
 
-        transform.position = ClampCameraInside(rectCurernt);
+        if (bg != null)
+        {
+            var boundsCurrent = bg.GetComponent<SpriteRenderer>().bounds;
+            var rectCurernt = new Rect(boundsCurrent.min.x, boundsCurrent.min.y, boundsCurrent.size.x, boundsCurrent.size.y);
+
+            transform.position = ClampCameraInside(rectCurernt);
+        }
     }
 
     private Vector3 ClampCameraInside(Rect container)

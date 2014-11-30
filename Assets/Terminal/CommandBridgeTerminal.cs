@@ -11,9 +11,19 @@ Engines require diagnostics to function
 properly, making a burn without doing so may
 cause permanent damage or death.";
     }
-
+    
     class CommandBridgeTerminalPlotCourse : ScreenBehahvior
     {
+        private void PlayDramaMusic()
+        {
+            var music = GameObject.Find("Music");
+            
+            if (music == null)
+                return;
+
+            music.GetComponent<Music>().SetDrama();
+        }
+
         public ScreenInfo CurrentInfo
         {
             get
@@ -29,16 +39,18 @@ cause permanent damage or death.";
                         {
                             new ScreenAction("To Earth", () =>
                             {
-                                WorldState.SetFutureEvent(Time.time + 30, WorldEvent.EngineBlownUp);
+                                WorldState.SetFutureEvent(Time.time + 33, WorldEvent.EngineBlownUp);
                                 WorldState.SetHappened(WorldEvent.EngineOverheating);
                                 WorldState.SetHappened(WorldEvent.PlottedForEarth);
+                                PlayDramaMusic();
                                 return null;
                             }),
                             new ScreenAction("To Europa", () =>
                             {
-                                WorldState.SetFutureEvent(Time.time + 30, WorldEvent.EngineBlownUp);
+                                WorldState.SetFutureEvent(Time.time + 33, WorldEvent.EngineBlownUp);
                                 WorldState.SetHappened(WorldEvent.EngineOverheating);
                                 WorldState.SetHappened(WorldEvent.PlottedForEuropa);
+                                PlayDramaMusic();
                                 return null;
                             }),
                             new ScreenAction("Exit", () => null)
@@ -54,14 +66,16 @@ cause permanent damage or death.";
                         {
                             new ScreenAction("To Earth", () =>
                             {
-                                WorldState.SetFutureEvent(Time.time + 30, WorldEvent.PlottedForEarth);
-                                WorldState.SetFutureEvent(Time.time + 30, WorldEvent.End);
+                                WorldState.SetFutureEvent(Time.time, WorldEvent.PlottedForEarth);
+                                WorldState.SetFutureEvent(Time.time + 32, WorldEvent.End);
+                                PlayDramaMusic();
                                 return null;
                             }),
                             new ScreenAction("To Europa", () =>
                             {
-                                WorldState.SetFutureEvent(Time.time + 30, WorldEvent.PlottedForEuropa);
-                                WorldState.SetFutureEvent(Time.time + 30, WorldEvent.End);
+                                WorldState.SetFutureEvent(Time.time, WorldEvent.PlottedForEuropa);
+                                WorldState.SetFutureEvent(Time.time + 32, WorldEvent.End);
+                                PlayDramaMusic();
                                 return null;
                             }),
                             new ScreenAction("Exit", () => null)
