@@ -1512,6 +1512,7 @@ GameObject:
   - 4: {fileID: 465689631}
   - 212: {fileID: 465689633}
   - 114: {fileID: 465689632}
+  - 114: {fileID: 465689634}
   m_Layer: 0
   m_Name: BackgroundRoom4BG3
   m_TagString: Untagged
@@ -1565,6 +1566,18 @@ SpriteRenderer:
   m_SortingOrder: -2
   m_Sprite: {fileID: 21300000, guid: 4c7766a37d0c2844895d435538a73282, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!114 &465689634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 465689630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a743d727ad2037b4ebd51744c987de72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Speed: .300000012
 --- !u!1 &487567854
 GameObject:
   m_ObjectHideFlags: 0
@@ -2514,8 +2527,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 811545425}
-  m_LocalRotation: {x: -.0558010153, y: -.904981077, z: .406916142, w: -.110971861}
-  m_LocalPosition: {x: 4.5529995, y: -2.74499893, z: -4.97300005}
+  m_LocalRotation: {x: -.060168419, y: -.902055323, z: .409529984, w: -.122316279}
+  m_LocalPosition: {x: 4.54799986, y: -2.74499989, z: -4.9749999}
   m_LocalScale: {x: .095437333, y: .0594445355, z: .0570355356}
   m_Children: []
   m_Father: {fileID: 1715153465}
@@ -2641,6 +2654,7 @@ GameObject:
   - 4: {fileID: 812969830}
   - 212: {fileID: 812969832}
   - 114: {fileID: 812969831}
+  - 114: {fileID: 812969833}
   m_Layer: 0
   m_Name: BackgroundRoom4BG
   m_TagString: Untagged
@@ -2694,6 +2708,18 @@ SpriteRenderer:
   m_SortingOrder: -4
   m_Sprite: {fileID: 21300000, guid: 25f102aaf74a3d64b979924ca91dc02d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!114 &812969833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 812969829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a743d727ad2037b4ebd51744c987de72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Speed: .0500000007
 --- !u!1 &841361959
 GameObject:
   m_ObjectHideFlags: 0
@@ -3323,7 +3349,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1219035375}
   m_LocalRotation: {x: 9.9999977e-07, y: -.707106829, z: .707106829, w: -9.9999977e-07}
-  m_LocalPosition: {x: -.591000021, y: .906000018, z: -1}
+  m_LocalPosition: {x: -.649999976, y: .906000018, z: -1}
   m_LocalScale: {x: .162093759, y: .157657638, z: .0884092152}
   m_Children: []
   m_Father: {fileID: 911178501}
@@ -5753,6 +5779,7 @@ GameObject:
   - 4: {fileID: 2037383309}
   - 212: {fileID: 2037383311}
   - 114: {fileID: 2037383310}
+  - 114: {fileID: 2037383312}
   m_Layer: 0
   m_Name: BackgroundRoom4BG2
   m_TagString: Untagged
@@ -5806,6 +5833,18 @@ SpriteRenderer:
   m_SortingOrder: -3
   m_Sprite: {fileID: 21300000, guid: f762614357c13a048a88eb0b5b20aff7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!114 &2037383312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2037383308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a743d727ad2037b4ebd51744c987de72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Speed: .100000001
 --- !u!1001 &2074444643
 Prefab:
   m_ObjectHideFlags: 0

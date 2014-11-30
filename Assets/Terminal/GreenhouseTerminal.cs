@@ -46,7 +46,11 @@ the instant temperature fall.", new List<ScreenAction> {
                     return new ScreenInfo(
                         "Greenhouse Computer\n" +
                         "-------------------\n\n" +
-                        "Warning, flames detected in this room.\n",
+                        @"Warning, flames detected in this room.
+Recommended course of action is to vent the
+atmosphere from the room, removing the oxygen
+feeding the fire. This will also kill any
+living entities in here.",
 
                         new List<ScreenAction>
                         {
