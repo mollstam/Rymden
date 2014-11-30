@@ -12,6 +12,8 @@
 
 		_Distortion ("Distortion", Float) = 1
 		_HsyncFactor ("HSync Factor", Float) = 0
+		_Bloom ("Bloom", Float) = 0
+		_Blur ("Blur", Float) = 0
 
 		_ColorMask ("Color Mask", Float) = 15
 	}
@@ -51,6 +53,7 @@
 			CGPROGRAM
 				#pragma vertex vert
 				#pragma fragment frag
+				#pragma glsl
 				#include "UnityCG.cginc"
 
 				struct appdata_t
@@ -72,6 +75,10 @@
 				fixed4 _Color;
 				float _Distortion;
 				float _HsyncFactor;
+				float _Bloom;
+				float _Blur;
+
+				const float EPSILON = 0.000001;
 
 				float2 radialDistortion(float2 coord)
 		        {
@@ -82,6 +89,20 @@
 
 		        /* Credit due to Cathode.app guy! <3 */
 
+		        float4 transparentize(float3 color)
+				{
+				    float maxComponent = max(color.r, max(color.g, color.b));
+				    float3 finalColor = color.rgb * ((1.0 + EPSILON) / (maxComponent + EPSILON));
+				    return float4(finalColor, maxComponent);
+				}
+
+		        float4 transparentize(float4 color)
+				{
+				    float4 newColor = transparentize(color.rgb);
+				    newColor.a *= color.a;
+				    return newColor;
+				}
+
 		        float pictureWave(float variable, float repeatCount, float speed)
 				{
 				    float waveLength = repeatCount * variable;
@@ -90,7 +111,7 @@
 				    return sin(waveLength + waveSpeed);
 				}
 
-		        float pictureHsync(vec2 coords)
+		        float pictureHsync(float2 coords)
 				{
 				    float coordSum = coords.x + coords.y;
 				    float coordProduct = coords.x * coords.y;
@@ -108,6 +129,23 @@
 				    float hsync = 0.09;
 
 				    return hsync * finalWave;
+				}
+
+				float4 addColorsWithAlpha(float4 colorAbove, float4 colorBelow)
+				{
+				    float3 scaledColorAbove = colorAbove.rgb * colorAbove.a;
+				    float3 scaledColorBelow = colorBelow.rgb * colorBelow.a;
+				    
+				    float oneMinusAlpha = (1.0 - colorAbove.a);
+				    
+				    float3 outColor = scaledColorAbove + oneMinusAlpha * scaledColorBelow;
+				    
+				    float outAlpha = colorAbove.a + oneMinusAlpha * colorBelow.a;
+				    
+				    // The divide below keeps this operation associative, but changes the look slightly.
+				    outColor.rgb /= (outAlpha + EPSILON);
+				    
+				    return float4(outColor, outAlpha);
 				}
 
 
@@ -131,12 +169,16 @@
 					half4 col = i.color;
 
 					float2 texcoord = radialDistortion(i.texcoord);
-					
+
 					if (_HsyncFactor > 0)
 						texcoord.x -= pictureHsync(texcoord);
 
 					col.a *= tex2D(_MainTex, texcoord).a;
 					col = col * _Color;
+
+					// Overbright
+					col.rgb += col.a * 0.3;
+
 					clip (col.a - 0.01);
 					return col;
 				}
