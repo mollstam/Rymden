@@ -188,6 +188,7 @@ public class Terminal : MonoBehaviour
         AddScreen(startScreen);
         _addNextCharAt = 0.0f;
         _inUse = false;
+        GetComponent<TerminalRenderer>().ClearTexture();
     }
 
     public void StartUsing()
@@ -239,6 +240,7 @@ public class Terminal : MonoBehaviour
                         if (_screens.Any())
                         {
                             _currentBuffer = "";
+                            GetComponent<TerminalRenderer>().ClearTexture();
                         }
                         else
                         {
@@ -250,6 +252,7 @@ public class Terminal : MonoBehaviour
                         _screens.Push(newScreen);
 
                     _currentBuffer = "";
+                    GetComponent<TerminalRenderer>().ClearTexture();
                     _acceptingInput = false;
                 }
 

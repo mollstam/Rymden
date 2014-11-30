@@ -25,6 +25,8 @@ public class TerminalRenderer : MonoBehaviour {
         _renderData.renderTexture = new RenderTexture(_renderData.width, _renderData.height, 24);
         _renderData.renderTexture.filterMode = FilterMode.Point;
 
+        ClearTexture();
+
         renderer.material.SetTexture("_MainTex", _renderData.renderTexture);
     }
 
@@ -50,6 +52,14 @@ public class TerminalRenderer : MonoBehaviour {
         }
     }
 
+    public void ClearTexture()
+    {
+        RenderTexture prev = RenderTexture.active;
+        RenderTexture.active = _renderData.renderTexture;
+        GL.Clear(false, true, new Color (0.0f, 0.0f, 0.0f, 0.0f));
+        RenderTexture.active = prev;
+    }
+
     protected void BeginRenderTextureGUI(RenderTexture targetTexture)
     {
         if (Event.current.type == EventType.Repaint)
@@ -57,7 +67,6 @@ public class TerminalRenderer : MonoBehaviour {
             if (targetTexture != null)
             {
                 RenderTexture.active = targetTexture;
-                GL.Clear(false, true, new Color (0.0f, 0.0f, 0.0f, 0.0f));
             }
         }
     }
