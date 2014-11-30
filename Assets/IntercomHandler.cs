@@ -45,6 +45,11 @@ public class IntercomHandler : MonoBehaviour {
         Instance.Add(message, callback);
     }
 
+    public static void Clear()
+    {
+        Instance.ClearAllMessages();
+    }
+
     public void Update()
     {
         _maxWidth = UnityEngine.Screen.width - 240;
@@ -87,6 +92,12 @@ public class IntercomHandler : MonoBehaviour {
         qi.message = message;
         qi.callback = callback;
         _queue.Enqueue(qi);
+    }
+
+    public void ClearAllMessages()
+    {
+        _queue.Clear();
+        ClearMessage();
     }
 
     private void ClearMessage()
