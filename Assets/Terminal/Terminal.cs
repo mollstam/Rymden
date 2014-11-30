@@ -47,8 +47,8 @@ public interface ScreenBehahvior
 
 public class Screen
 {
-    private ScreenBehahvior _behavior;
-    private RoomType _roomType;
+    private readonly ScreenBehahvior _behavior;
+    private readonly RoomType _roomType;
 
     public Screen(RoomType roomType, ScreenBehahvior behavior)
     {
@@ -60,7 +60,7 @@ public class Screen
     {
         get
         {
-            var text =  _behavior.CurrentInfo.Text;
+            var text = AllText();
             var options = AllOptions();
 
             if (options.Any())
@@ -102,6 +102,19 @@ public class Screen
 
     private List<ScreenAction> AllOptions()
     {
+        if (WorldState.HasHappened(WorldEvent.StartInfoAvailable) &&
+            !WorldState.HasHappened(WorldEvent.StartInfoRead))
+        {
+            return new List<ScreenAction>
+            {
+                new ScreenAction("Dismiss warning", () =>
+                {
+                    WorldState.SetHappened(WorldEvent.StartInfoRead);
+                    return _behavior;
+                })
+            };
+        }
+
         var options = new List<ScreenAction>(_behavior.CurrentInfo.Options);
 
         if (_behavior.ShowMessages)
@@ -111,6 +124,22 @@ public class Screen
             options.Add(new ScreenAction("Map", () => new MapScreen(_roomType)));
 
         return options;
+    }
+
+    private string AllText()
+    {
+        if (WorldState.HasHappened(WorldEvent.StartInfoAvailable) &&
+           !WorldState.HasHappened(WorldEvent.StartInfoRead))
+        {
+            return "!!! EMERGENCY !!!\n\n" +
+                   "- ASTEROID STORM DETECTED\n" +
+                   "- COURSE HAS BEEN DIVERTED \n" +
+                   "- ASTEROID HIT DETECTED\n" +
+                   "- FIRE BETWEEN ENGINEERING AND GREENHOUSE\n" +
+                   "- ENGINES OFFLINE, SHIP TUMBLING FREE\n";
+        }
+
+        return _behavior.CurrentInfo.Text;
     }
 }
 

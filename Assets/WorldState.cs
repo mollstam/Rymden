@@ -50,18 +50,20 @@ public class ConditionedAction
 
 public class Message
 {
-    public Message(string subject, string text)
+    public Message(string subject, float time, string text)
     {
         Subject = subject;
         Text = text;
+        Time = time;
         Read = false;
     }
-
+    
     public void MarkRead()
     {
         Read = true;
     }
-    
+
+    public float Time { get; private set; }
     public string Subject { get; private set; }
     public string Text { get; private set; }
     public bool Read { get; private set; }
@@ -72,7 +74,21 @@ public static class WorldState
     static WorldState()
     {
         SetHappened(WorldEvent.StartInfoAvailable);
-        AddNewMessage("God Speed", "Good luck on your most important\njourney LOLS.");
+        AddNewMessage("Godspeed", TimeWithOffset(-126194123),
+            @"Good luck on your journey! Always remember that
+you are, by piloting these supply missions to
+EUROPA II, a hero. The supplies your ship
+carries will feed and maintain the EUROPA II
+science colony for years to come.
+
+The safety of these supply missions are always
+of utmost concern and we can proudly state that
+no EUROPA II supply mission has ever suffered
+any major problems.
+
+Regards,
+Traval Blansson
+Space-V Shipyard Overseer");
     }
 
     private static readonly List<Message> Messages = new List<Message>();
@@ -86,7 +102,19 @@ public static class WorldState
 
     public static void AddNewMessage(string subject, string text)
     {
-        Messages.Add(new Message(subject, text));
+        AddNewMessage(subject, TimeWithOffset(0), text);
+    }
+
+    private static float TimeWithOffset(float offset)
+    {
+        var epochStart = new DateTime(1970, 1, 1, 8, 0, 0, DateTimeKind.Utc);
+        return (float)(DateTime.UtcNow - epochStart).TotalSeconds + 788432121 + offset;
+    }
+
+    public static void AddNewMessage(string subject, float time, string text)
+    {
+        Messages.Add(new Message(subject, time, text));
+        Messages.Sort((m1, m2) => m1.Time.CompareTo(m2.Time));
     }
 
     public static List<Message> AllMessages()

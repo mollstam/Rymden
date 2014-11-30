@@ -1,5 +1,7 @@
 ﻿
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace Assets.Terminal
@@ -19,8 +21,11 @@ namespace Assets.Terminal
             {
                 var subjectUnderline = new string('-', _message.Subject.Count());
 
+                var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+                var time = epoch.AddSeconds(_message.Time);
+
                 return new ScreenInfo(
-                    _message.Subject + "\n" + subjectUnderline + "\n\n" + _message.Text,
+                    _message.Subject + "\n" + subjectUnderline + "\n[" + string.Format("{0}-{1}-{2} {3:00}:{4:00}", time.Year, time.Month, time.Day, time.Hour, time.Minute) + "]\n\n" + _message.Text,
                     new List<ScreenAction> { new ScreenAction("Back", () =>
                     {
                         _message.MarkRead();
