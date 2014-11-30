@@ -726,8 +726,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 242461566}
   m_LocalRotation: {x: 9.9999977e-07, y: -.707106829, z: .707106829, w: -9.9999977e-07}
-  m_LocalPosition: {x: -3.13000011, y: .5, z: -1}
-  m_LocalScale: {x: .306430668, y: .172364816, z: .191518992}
+  m_LocalPosition: {x: 2.04699993, y: .0759999976, z: -1}
+  m_LocalScale: {x: .062616162, y: .0352210961, z: .0327756181}
   m_Children: []
   m_Father: {fileID: 1038762824}
   m_RootOrder: 4
@@ -841,7 +841,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CharacterInterval: .00999999978
   ScreenName: ScienceLabTerminal
-  CameraSize: 1
+  CameraSize: .300000012
 --- !u!1 &243824944
 GameObject:
   m_ObjectHideFlags: 0
@@ -1027,8 +1027,8 @@ Transform:
   m_PrefabInternal: {fileID: 1446076813}
   m_GameObject: {fileID: 251967944}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .430000007, y: -1.03999996, z: 0}
-  m_LocalScale: {x: 1.96000004, y: 2.63000011, z: 1}
+  m_LocalPosition: {x: 2.03999996, y: -.00999999978, z: 0}
+  m_LocalScale: {x: .559729695, y: .751066089, z: .285576463}
   m_Children: []
   m_Father: {fileID: 1038762824}
   m_RootOrder: 0
@@ -1717,7 +1717,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd24289f2e78584cb7609004d494668, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartingRoom: {fileID: 1964796008}
+  StartingRoom: {fileID: 1038762824}
 --- !u!114 &672252836
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3105,8 +3105,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1440645538}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.75, y: -1.88999999, z: -.449999988}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 3.05999994, y: -5.51000023, z: -.449999988}
+  m_LocalScale: {x: .451025605, y: 1.40999997, z: 1}
   m_Children: []
   m_Father: {fileID: 911178501}
   m_RootOrder: 0
@@ -3122,7 +3122,7 @@ SpriteRenderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: 87fb4c3ddda105147a2321510bf83cb5, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -3130,7 +3130,7 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 39661939789f743ef8e316429f85dc3c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ae8ec4ac5e5ed6f41b32ff9c9dd0c487, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &1440645541
 MonoBehaviour:
@@ -3153,11 +3153,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400000, guid: 2f5d27d963431bb4fa3f01afe04f0e50, type: 2}
       propertyPath: m_LocalPosition.x
-      value: .430000007
+      value: 2.03999996
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 2f5d27d963431bb4fa3f01afe04f0e50, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -1.03999996
+      value: -.00999999978
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 2f5d27d963431bb4fa3f01afe04f0e50, type: 2}
       propertyPath: m_LocalPosition.z
@@ -3195,6 +3195,18 @@ Prefab:
       propertyPath: Terminal
       value: 
       objectReference: {fileID: 242461567}
+    - target: {fileID: 400000, guid: 2f5d27d963431bb4fa3f01afe04f0e50, type: 2}
+      propertyPath: m_LocalScale.x
+      value: .559729695
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 2f5d27d963431bb4fa3f01afe04f0e50, type: 2}
+      propertyPath: m_LocalScale.y
+      value: .751066089
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 2f5d27d963431bb4fa3f01afe04f0e50, type: 2}
+      propertyPath: m_LocalScale.z
+      value: .285576463
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2f5d27d963431bb4fa3f01afe04f0e50, type: 2}
   m_RootGameObject: {fileID: 251967944}

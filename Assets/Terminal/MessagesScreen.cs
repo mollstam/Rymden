@@ -52,7 +52,9 @@ namespace Assets.Terminal
         {
             get
             {
-                var allMessageActions = WorldState.AllMessages().Select(message =>
+                var allMessages = new List<Message>(WorldState.AllMessages());
+
+                var allMessageActions = allMessages.Select(message =>
                     new ScreenAction(GetMessageSubjectDisplayName(message), () =>
                         new MessageScreen(message))).ToList();
 
