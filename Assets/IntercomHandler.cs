@@ -175,7 +175,7 @@ public class IntercomHandler : MonoBehaviour {
         }
 
         if (part != " " && clip != null)
-            audio.PlayOneShot(clip, 1.0f);
+            audio.PlayOneShot(clip, 0.1f);
     }
 
     private void CutToFirstSegment(ref string s)
