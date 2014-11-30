@@ -29,14 +29,14 @@ cause permanent damage or death.";
                         {
                             new ScreenAction("To Earth", () =>
                             {
-                                WorldState.SetFutureEvent(Time.time + 60, WorldEvent.EngineBlownUp);
+                                WorldState.SetFutureEvent(Time.time + 30, WorldEvent.EngineBlownUp);
                                 WorldState.SetHappened(WorldEvent.EngineOverheating);
                                 WorldState.SetHappened(WorldEvent.PlottedForEarth);
                                 return null;
                             }),
                             new ScreenAction("To Europa", () =>
                             {
-                                WorldState.SetFutureEvent(Time.time + 60, WorldEvent.EngineBlownUp);
+                                WorldState.SetFutureEvent(Time.time + 30, WorldEvent.EngineBlownUp);
                                 WorldState.SetHappened(WorldEvent.EngineOverheating);
                                 WorldState.SetHappened(WorldEvent.PlottedForEuropa);
                                 return null;
@@ -54,14 +54,14 @@ cause permanent damage or death.";
                         {
                             new ScreenAction("To Earth", () =>
                             {
-                                WorldState.SetFutureEvent(Time.time + 60, WorldEvent.PlottedForEarth);
-                                WorldState.SetFutureEvent(Time.time + 60, WorldEvent.End);
+                                WorldState.SetFutureEvent(Time.time + 30, WorldEvent.PlottedForEarth);
+                                WorldState.SetFutureEvent(Time.time + 30, WorldEvent.End);
                                 return null;
                             }),
                             new ScreenAction("To Europa", () =>
                             {
-                                WorldState.SetFutureEvent(Time.time + 60, WorldEvent.PlottedForEuropa);
-                                WorldState.SetFutureEvent(Time.time + 60, WorldEvent.End);
+                                WorldState.SetFutureEvent(Time.time + 30, WorldEvent.PlottedForEuropa);
+                                WorldState.SetFutureEvent(Time.time + 30, WorldEvent.End);
                                 return null;
                             }),
                             new ScreenAction("Exit", () => null)

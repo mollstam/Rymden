@@ -41,7 +41,6 @@ public class LightStrober : MonoBehaviour
         }
 
         _currentIntensity = Math.Max(_currentIntensity, MinIntensity);
-        Debug.Log(_currentIntensity);
         var currentColor = _spriteRenderer.color;
         currentColor.a = _currentIntensity;
         _spriteRenderer.color = currentColor;
