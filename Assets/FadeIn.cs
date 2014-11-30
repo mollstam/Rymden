@@ -13,7 +13,7 @@ public class FadeIn : MonoBehaviour
     public void Update()
     {
         var currentColor = _renderer.color;
-        currentColor.a -= Time.deltaTime*0.05f;
+        currentColor.a -= Time.deltaTime*0.1f;
         _renderer.color = currentColor;
     }
 }
