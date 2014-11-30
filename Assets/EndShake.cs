@@ -18,9 +18,6 @@ public class EndShake : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (WorldState.HasEndState())
-            return;
-
         if (!_shaking && (WorldState.HasHappened(WorldEvent.PlottedForEarth) || WorldState.HasHappened(WorldEvent.PlottedForEuropa)))
         {
             _startedAt = Time.time;

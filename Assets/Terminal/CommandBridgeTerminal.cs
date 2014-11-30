@@ -32,7 +32,7 @@ cause permanent damage or death.";
                 {
                     return new ScreenInfo(
                         "Plotting Course\n" +
-                        "---------------\n\n" +
+                        "---------------\n" +
                         CommandBridgeTerminalConstants.HeatWarning,
 
                         new List<ScreenAction>
