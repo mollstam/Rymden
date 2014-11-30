@@ -33,7 +33,7 @@ namespace Assets.Terminal
 
     1: Supplies  2: Greenhouse  3: Science Lab
         4: Engineering  5: Living Quarters
-    6: Medical Bay  7: Dining Hall  8: Bridge".Replace(RoomTypeToChar(_roomType), "<color=#ff0000>x</color>"),
+    6: Medical Bay  7: Dining Hall  8: Bridge".Replace(RoomTypeToChar(_roomType), "x"),
 
                     new List<ScreenAction>
                     {
