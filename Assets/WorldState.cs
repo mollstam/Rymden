@@ -204,8 +204,5 @@ Space-V Shipyard Overseer");
         }
 
         ConditionedActions.RemoveAll(x => x.Predicate());
-
-        if (HasEndState())
-            Debug.Log("END");
     }
 }

@@ -111,6 +111,9 @@ public class RoomController : MonoBehaviour
 
     public void Update()
     {
+        if (WorldState.HasEndState())
+            return;
+
         if (_roomTransitionAnimator.IsAnimating)
             return;
 

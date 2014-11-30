@@ -125,11 +125,11 @@
 					float color = 3.0 - (3.*length(2.3*p));
 	
 					float3 coord = float3(atan2(p.x,p.y)/6.2832+.5, length(p)*.4, .5);
-					float time = _Time.y * 4.0f;
+					float time = _Time.y * 3.0f;
 
 					for(int i = 1; i <= 7; i++)
 					{
-						float power = pow(2.0, float(i));
+						float power = pow(3.0, float(i));
 						color += (1.5 / power) * simplexnoise(coord + float3(0.,-time*.05, time*.01), power*16.);
 					}
 
