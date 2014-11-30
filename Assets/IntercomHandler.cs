@@ -222,6 +222,9 @@ public class IntercomHandler : MonoBehaviour {
 
     public void OnGUI()
     {
+        if (RoomController.Instance.InTerminal)
+            return;
+            
         String s = "";
         if (_labelContents.Length > 0)
         {
