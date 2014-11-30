@@ -67,6 +67,7 @@ public class TerminalRenderer : MonoBehaviour {
             if (targetTexture != null)
             {
                 RenderTexture.active = targetTexture;
+                ClearTexture();
             }
         }
     }
