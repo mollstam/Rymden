@@ -111,6 +111,9 @@ public class RoomController : MonoBehaviour
 
     public void Update()
     {
+        if (IntercomHandler.IntroMode && Application.isEditor && Input.GetKeyDown(KeyCode.X))
+            GameObject.Find("Intro").GetComponent<Intro>().End();
+
         if (WorldState.HasEndState())
             return;
 
