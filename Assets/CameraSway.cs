@@ -17,7 +17,7 @@ public class CameraSway : MonoBehaviour
         var scale = 1.0f;
 
         if (GetComponent<RoomController>().InTerminal)
-            scale = 0.08f;
+            return;
 
         var currentRoomPos = GetComponent<RoomController>().ActiveTransform.position;
         var currentPosition = new Vector3(currentRoomPos.x, currentRoomPos.y, transform.position.z);

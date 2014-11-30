@@ -174,8 +174,20 @@
 						texcoord.x -= pictureHsync(texcoord);
 
 					col.a *= tex2D(_MainTex, texcoord).a;
-					col = col * _Color;
 
+					float outline = 0;
+
+					float distance = 3.0;
+
+					outline += tex2D(_MainTex, texcoord + float2(distance/_ScreenParams.x, 0)).a * 0.2;
+					outline += tex2D(_MainTex, texcoord - float2(distance/_ScreenParams.x, 0)).a * 0.2;
+					outline += tex2D(_MainTex, texcoord - float2(0, distance/_ScreenParams.x)).a * 0.2;
+					outline += tex2D(_MainTex, texcoord + float2(0, distance/_ScreenParams.x)).a * 0.2;
+
+					col.a += outline;
+
+					col = col * _Color;
+					
 					// Overbright
 					col.rgb += col.a * 0.3;
 
