@@ -136,7 +136,7 @@ public class RoomController : MonoBehaviour
 
     private void HandleLeftMouseClick()
     {
-        if (InTerminal)
+        if (InTerminal || WorldState.HasHappened(WorldEvent.PlottedForEarth) ||  WorldState.HasHappened(WorldEvent.PlottedForEuropa))
             return;
 
         var doorways = GameObject.FindGameObjectsWithTag("DoorWay");
